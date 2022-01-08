@@ -1,9 +1,6 @@
 import { Keyframes } from "@emotion/react";
 import { baseColors } from "./base-colors";
 
-export * from "./base-colors";
-export * from "./default";
-
 export type ThFn<K, T> = (unit: K, _default?: T | null) => T | undefined;
 
 export type ColorMode = "light" | "dark";

@@ -2,7 +2,6 @@
   "name": "@syfxlin/ustyled",
   "version": "1.0.0",
   "description": "css-in-js utils package",
-  "main": "index.js",
   "author": "Otstar Lin <syfxlin@gmail.com>",
   "license": "Apache-2.0",
   "keywords": [
@@ -11,8 +10,18 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "serve": "vite preview"
+    "build": "tsup",
+    "watch": "tsup --watch"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
   "repository": {
     "type": "git",
@@ -48,6 +57,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.5.1",
+    "tsup": "^5.11.11",
     "typescript": "^4.5.4",
     "vite": "^2.7.10",
     "vite-plugin-checker": "^0.3.4"
