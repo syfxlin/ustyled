@@ -1,5 +1,5 @@
 import React from "react";
-import { useU } from "../src/hooks/use-u";
+import { useU } from "../src";
 
 const Demo: React.FC = () => {
   const u = useU();
