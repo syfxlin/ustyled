@@ -1,9 +1,10 @@
-import { CSSProperties, UstyledFn } from "../types";
+import { CSSProperties } from "../types";
 import { CSSObject } from "@emotion/react";
 import { responsive, ResponsiveValue } from "./responsive";
+import { UstyledFn } from "./index";
 
 // prettier-ignore
-export type Flexbox = {
+export interface Flexbox {
   align: (value: ResponsiveValue<CSSProperties["alignItems"]>) => CSSObject;
   alignContent: (value: ResponsiveValue<CSSProperties["alignContent"]>) => CSSObject;
   justify: (value: ResponsiveValue<CSSProperties["justifyContent"]>) => CSSObject;
@@ -17,7 +18,7 @@ export type Flexbox = {
   justifySelf: (value: ResponsiveValue<CSSProperties["justifySelf"]>) => CSSObject;
   alignSelf: (value: ResponsiveValue<CSSProperties["alignSelf"]>) => CSSObject;
   order: (value: ResponsiveValue<CSSProperties["order"]>) => CSSObject;
-};
+}
 
 export const flexbox: UstyledFn<Flexbox> = (theme) => ({
   align: (value) =>

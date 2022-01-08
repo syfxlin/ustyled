@@ -1,6 +1,13 @@
-import { keyframes } from "@emotion/react";
+import { Keyframes, keyframes } from "@emotion/react";
 import { baseColors } from "./base-colors";
 import { UstyledTheme } from "./";
+
+const choose = <T>(unit: T, _default?: T | null) => {
+  if (_default === null) {
+    return undefined;
+  }
+  return _default ?? unit;
+};
 
 export const defaultTheme: UstyledTheme = {
   colorMode: "light",
@@ -13,8 +20,9 @@ export const defaultTheme: UstyledTheme = {
     xl: 1536,
   },
   animations: {
-    keyframes: {
-      spin: keyframes`
+    keyframes: (unit, _default) => {
+      const map: Record<string, Keyframes> = {
+        spin: keyframes`
         from {
           transform: rotate(0deg);
         }
@@ -23,7 +31,7 @@ export const defaultTheme: UstyledTheme = {
           transform: rotate(360deg);
         }
       `,
-      ping: keyframes`
+        ping: keyframes`
         0% {
           transform: scale(1);
           opacity: 1;
@@ -34,7 +42,7 @@ export const defaultTheme: UstyledTheme = {
           opacity: 0;
         }
       `,
-      pulse: keyframes`
+        pulse: keyframes`
         0%, 100% {
           opacity: 1;
         }
@@ -43,7 +51,7 @@ export const defaultTheme: UstyledTheme = {
           opacity: .5;
         }
       `,
-      bounce: keyframes`
+        bounce: keyframes`
         0%, 100% {
           transform: translateY(-25%);
           animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
@@ -54,75 +62,95 @@ export const defaultTheme: UstyledTheme = {
           animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
         }
       `,
+      };
+      return map[unit] ?? choose(unit, _default);
     },
-    properties: {
-      none: ["none"],
-      all: ["all"],
-      colors: ["background-color", "color", "border-color", "fill", "stroke"],
-      opacity: ["opacity"],
-      shadow: ["box-shadow"],
-      transform: ["transform"],
-      default: [
-        "background-color",
-        "color",
-        "border-color",
-        "fill",
-        "stroke",
-        "opacity",
-        "box-shadow",
-        "transform",
-        "filter",
-        "backdrop-filter",
-      ],
+    properties: (unit, _default) => {
+      const map: Record<string, string[]> = {
+        none: ["none"],
+        all: ["all"],
+        colors: ["background-color", "color", "border-color", "fill", "stroke"],
+        opacity: ["opacity"],
+        shadow: ["box-shadow"],
+        transform: ["transform"],
+        default: [
+          "background-color",
+          "color",
+          "border-color",
+          "fill",
+          "stroke",
+          "opacity",
+          "box-shadow",
+          "transform",
+          "filter",
+          "backdrop-filter",
+        ],
+      };
+      return map[unit]?.join(", ") ?? choose(unit, _default);
     },
-    timingFns: {
-      default: "ease",
-      linear: "linear",
-      in: "ease-in",
-      out: "ease-out",
-      "in-out": "ease-in-out",
-      spin: "linear",
-      ping: "cubic-bezier(0, 0, 0.2, 1)",
-      pulse: "cubic-bezier(0.4, 0, 0.6, 1)",
-      bounce: "ease",
+    timingFns: (unit, _default) => {
+      const map: Record<string, string> = {
+        default: "ease",
+        linear: "linear",
+        in: "ease-in",
+        out: "ease-out",
+        "in-out": "ease-in-out",
+        spin: "linear",
+        ping: "cubic-bezier(0, 0, 0.2, 1)",
+        pulse: "cubic-bezier(0.4, 0, 0.6, 1)",
+        bounce: "ease",
+      };
+      return map[unit] ?? choose(unit, _default);
     },
-    durations: (unit) => {
+    durations: (unit, _default) => {
       if (typeof unit === "number") {
         return `${unit}s`;
       }
-      return unit;
+      return choose(unit, _default);
+    },
+    delays: (unit, _default) => {
+      if (typeof unit === "number") {
+        return `${unit}s`;
+      }
+      return choose(unit, _default);
     },
   },
   colors: baseColors,
-  shadows: {
-    xs: "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)",
-    sm: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 10px 15px -5px, rgba(0, 0, 0, 0.04) 0px 7px 7px -5px",
-    md: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px",
-    lg: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 28px 23px -7px, rgba(0, 0, 0, 0.04) 0px 12px 12px -7px",
-    xl: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 36px 28px -7px, rgba(0, 0, 0, 0.04) 0px 17px 17px -7px",
+  shadows: (unit, _default) => {
+    const map: Record<string, string> = {
+      xs: "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)",
+      sm: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 10px 15px -5px, rgba(0, 0, 0, 0.04) 0px 7px 7px -5px",
+      md: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px",
+      lg: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 28px 23px -7px, rgba(0, 0, 0, 0.04) 0px 12px 12px -7px",
+      xl: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 36px 28px -7px, rgba(0, 0, 0, 0.04) 0px 17px 17px -7px",
+    };
+    return map[unit] ?? choose(unit, _default);
   },
-  fonts: {
-    sans: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
-    mono: `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
-    serif: `Georgia, Cambria, "Times New Roman", Times, serif`,
+  fonts: (unit, _default) => {
+    const map: Record<string, string> = {
+      sans: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
+      mono: `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
+      serif: `Georgia, Cambria, "Times New Roman", Times, serif`,
+    };
+    return map[unit] ?? choose(unit, _default);
   },
-  fontSizes: (unit) => {
+  fontSizes: (unit, _default) => {
     if (typeof unit === "number") {
       return `${unit}rem`;
     }
     // TODO: h1-h6
-    return unit;
+    return choose(unit, _default);
   },
-  letterSpacings: (unit) => {
+  letterSpacings: (unit, _default) => {
     if (typeof unit === "number") {
       return `${unit * 0.025}rem`;
     }
-    return unit;
+    return choose(unit, _default);
   },
-  lineHeights: (unit) => {
-    return unit;
+  lineHeights: (unit, _default) => {
+    return choose(unit, _default);
   },
-  sizes: (unit) => {
+  sizes: (unit, _default) => {
     if (typeof unit === "number") {
       return `${unit * 0.25}rem`;
     }
@@ -133,15 +161,15 @@ export const defaultTheme: UstyledTheme = {
       vw: "100vw",
       vh: "100vh",
     };
-    return map[unit] ?? unit;
+    return map[unit] ?? choose(unit, _default);
   },
-  spacings: (unit) => {
+  spacings: (unit, _default) => {
     if (typeof unit === "number") {
       return `${unit * 0.25}rem`;
     }
-    return unit;
+    return choose(unit, _default);
   },
-  radius: (unit) => {
+  radius: (unit, _default) => {
     if (typeof unit === "number") {
       return `${unit * 0.25}rem`;
     }
@@ -150,6 +178,12 @@ export const defaultTheme: UstyledTheme = {
       half: "50%",
       full: "9999px",
     };
-    return map[unit] ?? unit;
+    return map[unit] ?? choose(unit, _default);
+  },
+  borderWidths: (unit, _default) => {
+    if (typeof unit === "number") {
+      return `${unit}px`;
+    }
+    return choose(unit, _default);
   },
 };

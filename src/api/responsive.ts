@@ -1,7 +1,14 @@
 import { CSSObject } from "@emotion/react";
 import { UstyledTheme } from "../theme";
 
-export type ResponsiveValue<T> = [T, T, T, T, T, T] | T;
+export type ResponsiveValue<T> =
+  | T
+  | [T]
+  | [T, T]
+  | [T, T, T]
+  | [T, T, T, T]
+  | [T, T, T, T, T]
+  | [T, T, T, T, T, T];
 
 export const responsive = <T>(
   theme: UstyledTheme,

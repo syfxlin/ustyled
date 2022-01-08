@@ -1,9 +1,10 @@
 import { responsive, ResponsiveValue } from "./responsive";
-import { CSSProperties, UstyledFn } from "../types";
+import { CSSProperties } from "../types";
 import { CSSObject } from "@emotion/react";
+import { UstyledFn } from "./index";
 
 // prettier-ignore
-export type Grid = {
+export interface Grid {
   gap: (value: ResponsiveValue<CSSProperties["gap"]>) => CSSObject;
   rowGap: (value: ResponsiveValue<CSSProperties["rowGap"]>) => CSSObject;
   columnGap: (value: ResponsiveValue<CSSProperties["columnGap"]>) => CSSObject;

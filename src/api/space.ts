@@ -1,9 +1,10 @@
 import { CSSObject } from "@emotion/react";
-import { CSSProperties, UstyledFn } from "../types";
+import { CSSProperties } from "../types";
 import { responsive, ResponsiveValue } from "./responsive";
+import { UstyledFn } from "./index";
 
 // prettier-ignore
-export type Space = {
+export interface Space {
   m: (value: ResponsiveValue<CSSProperties["margin"]>) => CSSObject;
   mt: (value: ResponsiveValue<CSSProperties["marginTop"]>) => CSSObject;
   mb: (value: ResponsiveValue<CSSProperties["marginBottom"]>) => CSSObject;
@@ -22,7 +23,7 @@ export type Space = {
   py: (value: ResponsiveValue<CSSProperties["padding"]>) => CSSObject;
   ps: (value: ResponsiveValue<CSSProperties["paddingInlineStart"]>) => CSSObject;
   pe: (value: ResponsiveValue<CSSProperties["paddingInlineEnd"]>) => CSSObject;
-};
+}
 
 export const space: UstyledFn<Space> = (theme) => ({
   m: (value) =>

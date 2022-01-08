@@ -1,59 +1,56 @@
-import { CSSProperties, UstyledFn } from "../types";
+import { CSSProperties } from "../types";
 import { CSSObject } from "@emotion/react";
 import { responsive, ResponsiveValue } from "./responsive";
+import { UstyledFn } from "./index";
+import { $color, ColorProperty } from "./util";
 
-export type Color = {
-  color: (
-    value: ResponsiveValue<CSSProperties["color"]>,
-    dark?: ResponsiveValue<CSSProperties["color"]>
-  ) => CSSObject;
-  bg: (
-    value: ResponsiveValue<CSSProperties["backgroundColor"]>,
-    dark?: ResponsiveValue<CSSProperties["backgroundColor"]>
-  ) => CSSObject;
-};
-
-type ColorParam = string | [string, (v: string) => string];
+// prettier-ignore
+export interface Color {
+  color: (value: ResponsiveValue<ColorProperty>, dark?: ResponsiveValue<ColorProperty>) => CSSObject;
+  fill: (value: ResponsiveValue<ColorProperty>, dark?: ResponsiveValue<ColorProperty>) => CSSObject;
+  stroke: (value: ResponsiveValue<ColorProperty>, dark?: ResponsiveValue<ColorProperty>) => CSSObject;
+  opacity: (value: ResponsiveValue<CSSProperties["opacity"]>) => CSSObject;
+}
 
 export const color: UstyledFn<Color> = (theme) => {
-  const parseColor = (c: ColorParam): string => {
-    if (typeof c === "string") {
-      c = [c, (v) => v];
-    }
-    const [color, convert] = c;
-    const [name, level] = color.split(".");
-    if (level === undefined) {
-      return theme.colors[name] as string;
-    }
-    return convert(
-      theme.colors[name === "primary" ? theme.primaryColor : name][
-        parseInt(level)
-      ]
-    );
-  };
-
+  const color = $color(theme);
   return {
     color: (value, dark) => {
       if (theme.colorMode === "light" || !dark) {
         return responsive(theme, value, (unit) => ({
-          color: parseColor(unit),
+          color: color(unit),
         }));
       } else {
         return responsive(theme, dark, (unit) => ({
-          color: parseColor(unit),
+          color: color(unit),
         }));
       }
     },
-    bg: (value, dark) => {
+    fill: (value, dark) => {
       if (theme.colorMode === "light" || !dark) {
         return responsive(theme, value, (unit) => ({
-          backgroundColor: parseColor(unit),
+          fill: color(unit),
         }));
       } else {
         return responsive(theme, dark, (unit) => ({
-          backgroundColor: parseColor(unit),
+          fill: color(unit),
         }));
       }
     },
+    stroke: (value, dark) => {
+      if (theme.colorMode === "light" || !dark) {
+        return responsive(theme, value, (unit) => ({
+          stroke: color(unit),
+        }));
+      } else {
+        return responsive(theme, dark, (unit) => ({
+          stroke: color(unit),
+        }));
+      }
+    },
+    opacity: (value) =>
+      responsive(theme, value, (unit) => ({
+        opacity: unit,
+      })),
   };
 };
