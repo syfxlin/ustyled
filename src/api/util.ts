@@ -42,7 +42,6 @@ export interface Util {
   $spacing: (value: string | number) => string | number | undefined;
 }
 
-// TODO: up, down, between
 export const util: UstyledFn<Util> = (theme) => ({
   theme,
   $merge,

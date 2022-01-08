@@ -2,6 +2,7 @@ import { CSSObject } from "@emotion/react";
 import { Pseudos } from "csstype";
 import { $merge } from "./util";
 import { UstyledFn } from "./index";
+import { Breakpoints } from "../theme";
 
 // prettier-ignore
 export type Pseudo = {
@@ -40,6 +41,9 @@ export type Pseudo = {
   $fullScreen: (...styles: CSSObject[]) => CSSObject;
   $selection: (...styles: CSSObject[]) => CSSObject;
   $selector: (selector: Pseudos | string, ...styles: CSSObject[]) => CSSObject;
+  $up: (minWidth: keyof Breakpoints, ...styles: CSSObject[]) => CSSObject;
+  $down: (maxWidth: keyof Breakpoints, ...styles: CSSObject[]) => CSSObject;
+  $between: (minWidth: keyof Breakpoints, maxWidth: keyof Breakpoints, ...styles: CSSObject[]) => CSSObject;
 };
 
 export const $selector = (
@@ -54,6 +58,9 @@ export const $selector = (
 // prettier-ignore
 export const pseudo: UstyledFn<Pseudo> = (theme) => ({
   $selector,
+  $up: (minWidth, ...styles) => $selector(`@media (min-width: ${theme.breakpoints[minWidth]}px)`, ...styles),
+  $down: (maxWidth, ...styles) => $selector(`@media (max-width: ${theme.breakpoints[maxWidth]}px)`, ...styles),
+  $between: (minWidth, maxWidth, ...styles) => $selector(`@media (min-width: ${theme.breakpoints[minWidth]}px) and (max-width: ${theme.breakpoints[maxWidth]}px)`, ...styles),
   $hover: (...styles) => $selector("&:hover, &[data-hover]", ...styles),
   $active: (...styles) => $selector("&:active, &[data-active]", ...styles),
   $focus: (...styles) => $selector("&:focus, &[data-focus]", ...styles),
