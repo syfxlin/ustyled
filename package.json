@@ -1,6 +1,6 @@
 {
   "name": "@syfxlin/ustyled",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "css-in-js utils package",
   "author": "Otstar Lin <syfxlin@gmail.com>",
   "license": "Apache-2.0",
