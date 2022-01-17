@@ -1,4 +1,3 @@
-import { Keyframes } from "@emotion/react";
 import { baseColors } from "./base-colors";
 
 export type ThFn<K, T> = (unit: K, _default?: T | null) => T | undefined;
@@ -14,7 +13,7 @@ export type Breakpoints = {
 };
 
 export type Animations = {
-  keyframes: ThFn<string | Keyframes, Keyframes>;
+  keyframes: ThFn<string, string>;
   properties: ThFn<string, string>;
   timingFns: ThFn<string, string>;
   durations: ThFn<string | number, string>;

@@ -1,54 +1,34 @@
-import { CSSObject } from "@emotion/react";
-import deepmerge from "deepmerge";
-import { UstyledFn } from "./index";
-import { responsive, ResponsiveValue } from "./responsive";
 import { UstyledTheme } from "../theme";
 
-export type ColorProperty = string | [string, (v: string) => string];
-
-export const $color = (theme: UstyledTheme) => {
-  return (c: ColorProperty): string => {
-    if (typeof c === "string") {
-      c = [c, (v) => v];
-    }
-    const [color, convert] = c;
-    const m = color.match(/^([a-zA-Z]+)(\d+)?$/);
+export const color = (color: string | number | undefined, theme: UstyledTheme): string => {
+  const parse = (value: string) => {
+    const m = value.match(/^([a-zA-Z]+)(\d+)?$/);
     if (!m || !theme.colors[m[1]]) {
-      return color;
+      return value;
     }
     const [, name, level] = m;
     if (level === undefined) {
-      return convert(theme.colors[name] as string);
+      return theme.colors[name] as string;
     }
-    return convert(
-      theme.colors[name === "primary" ? theme.primaryColor : name][
-        parseInt(level)
-      ]
-    );
+    return theme.colors[name === "primary" ? theme.primaryColor : name][parseInt(level)];
   };
+
+  // prettier-ignore
+  const [value, dark] = String(color).split(",").map((c) => c.trim());
+  if (!dark || theme.colorMode === "light") {
+    return parse(value);
+  } else {
+    return parse(dark);
+  }
 };
 
-export const $merge = (...styles: CSSObject[]) => {
-  return deepmerge.all<CSSObject>(styles);
+export const num = (value: string | number) => {
+  if (typeof value === "number") {
+    return value;
+  }
+  // @ts-ignore
+  if (value !== "" && !isNaN(value)) {
+    value = parseFloat(value);
+  }
+  return value;
 };
-
-// prettier-ignore
-export interface Util {
-  theme: UstyledTheme;
-  $merge: (...styles: CSSObject[]) => CSSObject;
-  $responsive: <T>(value: ResponsiveValue<T>, fn: (unit: T) => CSSObject) => CSSObject;
-  $color: (value: ColorProperty, dark?: ColorProperty) => string;
-  $size: (value: string | number) => string | number | undefined;
-  $spacing: (value: string | number) => string | number | undefined;
-}
-
-export const util: UstyledFn<Util> = (theme) => ({
-  theme,
-  $merge,
-  $responsive: (value, fn) => {
-    return responsive(theme, value, fn);
-  },
-  $color: $color(theme),
-  $size: (value) => theme.sizes(value),
-  $spacing: (value) => theme.spacings(value),
-});
