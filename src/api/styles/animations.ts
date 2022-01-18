@@ -55,11 +55,11 @@ export const animationName = style<"animationName", CSSProperties["animationName
 
 export const animations = compose(animation, animationTimingFunction, animationDelay, animationDuration, animationName);
 
-export type Animations =
+export type AnimationsApi =
   | CSSApi<typeof animation>
   | CSSApi<typeof animationTimingFunction>
   | CSSApi<typeof animationDelay>
   | CSSApi<typeof animationDuration>
   | CSSApi<typeof animationName>;
 
-export type AnimationsVar = CSSVar<Animations>;
+export type AnimationsVar = CSSVar<AnimationsApi>;

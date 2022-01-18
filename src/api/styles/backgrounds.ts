@@ -87,7 +87,7 @@ export const backgrounds = compose(
   backgroundClip
 );
 
-export type Backgrounds = CSSApi<typeof background> &
+export type BackgroundsApi = CSSApi<typeof background> &
   CSSApi<typeof backgroundColor> &
   CSSApi<typeof backgroundImage> &
   CSSApi<typeof backgroundBlendMode> &
@@ -97,4 +97,4 @@ export type Backgrounds = CSSApi<typeof background> &
   CSSApi<typeof backgroundAttachment> &
   CSSApi<typeof backgroundClip>;
 
-export type BackgroundsVar = CSSVar<Backgrounds>;
+export type BackgroundsVar = CSSVar<BackgroundsApi>;

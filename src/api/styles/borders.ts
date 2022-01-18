@@ -1,21 +1,8 @@
 import { compose, style } from "../style";
 import { CSSApi, CSSProperties, CSSVar } from "../../types";
-import { UstyledTheme } from "../../theme";
-import { color, num } from "../util";
+import { border as $border, color } from "../util";
 
 // border, border-(top|bottom|left|right|x|y|inline|block)
-const $border = (value: string | number, theme: UstyledTheme): string | number | undefined => {
-  if (typeof value === "number") {
-    return theme.borderWidths(value);
-  }
-  const values = value.split(/\s+/).map((v) => {
-    const w = theme.borderWidths(num(v));
-    const c = color(w, theme);
-    return c ?? v;
-  });
-  return values.join(" ");
-};
-
 export const border = style<"b" | "border", CSSProperties["border"]>({
   prop: ["b", "border"],
   css: (value) => (theme) => ({
@@ -394,7 +381,7 @@ export const borders = compose(
   outlineStyle
 );
 
-export type Borders = CSSApi<typeof border> &
+export type BordersApi = CSSApi<typeof border> &
   CSSApi<typeof borderTop> &
   CSSApi<typeof borderBottom> &
   CSSApi<typeof borderLeft> &
@@ -445,4 +432,4 @@ export type Borders = CSSApi<typeof border> &
   CSSApi<typeof outlineOffset> &
   CSSApi<typeof outlineStyle>;
 
-export type BordersVar = CSSVar<Borders>;
+export type BordersVar = CSSVar<BordersApi>;
