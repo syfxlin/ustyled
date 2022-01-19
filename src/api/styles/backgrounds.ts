@@ -1,12 +1,12 @@
 import { CSSApi, CSSProperties, CSSVar } from "../../types";
 import { compose, style } from "../style";
-import { color } from "../util";
+import { $color } from "../util";
 
 // background
 export const background = style<"bg" | "background", CSSProperties["background"]>({
   prop: ["bg", "background"],
   css: (value) => (theme) => ({
-    background: color(value, theme),
+    background: $color(value, theme),
   }),
 });
 
@@ -14,7 +14,7 @@ export const background = style<"bg" | "background", CSSProperties["background"]
 export const backgroundColor = style<"bgColor" | "backgroundColor", CSSProperties["backgroundColor"]>({
   prop: ["bgColor", "backgroundColor"],
   css: (value) => (theme) => ({
-    backgroundColor: color(value, theme),
+    backgroundColor: $color(value, theme),
   }),
 });
 

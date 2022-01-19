@@ -1,12 +1,12 @@
 import { compose, style } from "../style";
 import { CSSApi, CSSProperties, CSSVar } from "../../types";
-import { border } from "../util";
+import { $border } from "../util";
 
 // box-shadow
 export const boxShadow = style<"boxShadow", CSSProperties["boxShadow"]>({
   prop: ["boxShadow"],
   css: (value) => (theme) => ({
-    boxShadow: border(value, theme),
+    boxShadow: $border(value, theme),
   }),
 });
 
@@ -14,7 +14,7 @@ export const boxShadow = style<"boxShadow", CSSProperties["boxShadow"]>({
 export const textShadow = style<"textShadow", CSSProperties["textShadow"]>({
   prop: ["textShadow"],
   css: (value) => (theme) => ({
-    textShadow: border(value, theme),
+    textShadow: $border(value, theme),
   }),
 });
 

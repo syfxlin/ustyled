@@ -12,7 +12,7 @@ import { responsive } from "./responsive";
 // (\s*;)                    结束分号，group5
 const PROP_REGEXP = /([-\w]+)(\s*:\s*)(?=\S)((?:\\[\s\S]|[^\\;{}])*?)(\s*!important)?(\s*;)/g;
 
-export const transform = (theme: UstyledTheme, generator: StyleGenerator) => {
+export const createCss = (theme: UstyledTheme, generator: StyleGenerator) => {
   const api = generator(theme);
 
   const template = (raw: string) => {

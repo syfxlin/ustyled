@@ -1,6 +1,6 @@
 import { compose, style } from "../style";
 import { CSSApi, CSSProperties, CSSVar } from "../../types";
-import { spacing as $spacing } from "../util";
+import { $spacing } from "../util";
 
 // margin
 export const margin = style<"m" | "margin", CSSProperties["margin"]>({

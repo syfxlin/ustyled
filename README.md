@@ -2,7 +2,7 @@
 
 ## Introduction
 
-ustyled（**styled**-system, **u**til） 是一个基于 [Emotion](https://github.com/emotion-js/emotion) 的 CSS-in-JS 工具库，旨在为 Emotion 添加类似 styled-system 的编写方式，同时避免使用 styled-system 导致的一些问题。
+ustyled（**styled**-system, **u**til） 是一个基于 CSS-in-JS 的工具库，旨在为 CSS-in-JS 添加类似 styled-system 的编写方式，同时避免使用 styled-system 导致的一些问题。
 
 ## Features
 
@@ -10,7 +10,7 @@ ustyled（**styled**-system, **u**til） 是一个基于 [Emotion](https://githu
 - 函数式主题
 - 暗色模式支持
 - 快速应用调色板
-- 适用于大多数 CSS-in-JS 库，不过目前仅适配 Emotion
+- 适用于大多数 CSS-in-JS 库
 - 按比例排版
 
 ## Installation
@@ -23,9 +23,11 @@ npm i @syfxlin/ustyled
 
 ## Usage
 
+支持 object 和 template string 两种编写方式。
+
 ```typescript jsx
 import React from "react";
-import { useU, UstyledProvider } from "@syfxlin/ustyled";
+import { useCss, UstyledProvider } from "@syfxlin/ustyled";
 
 const Root: React.FC = () => {
   return (
@@ -36,70 +38,46 @@ const Root: React.FC = () => {
 };
 
 const Demo: React.FC = () => {
-  const u = useU();
+  const css = useCss();
+
   return (
-    <div
-      css={[
-        u.m([2, 4, 6, 8, 10, 12]),
-        u.bg("blue5"),
-        u.color("green8"),
-        u.d("flex"),
-        u.align("center"),
-        u.justify("center"),
-        {
-          width: 100,
-          height: 100,
-        },
-        u.animation("spin", {
-          duration: "10s",
-          infinite: true,
-          timingFn: "in-out",
-          delay: "3s",
-        }),
-      ]}
-    >
-      Text
+    <div>
+      <div
+        css={css`
+          background-color: blue5;
+          width: 25;
+          height: 25;
+          bg-color: blue8;
+          border: 4 solid green5;
+          border-top: 20px solid yellow5;
+          outline: 10 solid red5;
+          color: red7;
+
+          ${{ height: "200px" }}
+
+          ${css`
+            width: 200px;
+          `}
+        `}
+      >
+        Text
+      </div>
+      <div
+        css={css(
+          {
+            bgColor: "blue5",
+            width: "100px",
+            height: "100px",
+          },
+          [{ width: "200px" }, { height: "200px" }]
+        )}
+      />
     </div>
   );
 };
 ```
 
-ustyled 内置了一些常见的 css api，以及一套简单的默认主题，如果默认的设置不适合您，可以按照以下方式进行自定义：
-
-```typescript jsx
-import React from "react";
-import {
-  UstyledApi,
-  api as defaultApi,
-  UstyledTheme,
-  defaultTheme,
-  UstyledProvider,
-} from "@syfxlin/ustyled";
-
-const api: UstyledApi = (theme) => ({
-  ...defaultApi(theme),
-  cleanfix: {}, // ...any
-});
-
-const theme: UstyledTheme = {
-  ...defaultTheme,
-  other: {}, // ...any
-};
-
-const Root: React.FC = () => {
-  return (
-    <UstyledProvider api={api} theme={theme}>
-      <Demo />
-    </UstyledProvider>
-  );
-};
-
-const Demo: React.FC = () => {
-  const u = useU();
-  const other = u.theme.other;
-  return <div css={[u.clearfix]}>Text</div>;
-};
-```
+ustyled 内置了一些常见的 css api，以及一套简单的默认主题，如果默认的设置不适合您，可以参考 `src/api/styles/*.ts` 以及 `src/theme/default-theme.ts`，然后将其设置到 `UstyledProvider`
 
 ## Why use this?
 
@@ -112,10 +90,10 @@ const Demo: React.FC = () => {
 
 ustyled 针对以上问题的解决方法：
 
-1. 大多数 CSS-in-JS 库都有 css prop 支持，我们可以直接将样式写入 css prop 从而解决冲突问题，如 `css={[u.m(10), u.p(10)]}`。
+1. 大多数 CSS-in-JS 库都有 css prop 支持，我们可以直接将样式写入 css prop 从而解决冲突问题，如 `css={css({ w: 10, h: 10 })}`。
 2. 同上，css prop 一般由 Babel 等工具在打包期间处理，不会因参数传递导致被覆盖问题。
 3. 采用函数式主题，如 `space: (unit: number) => unit * 4;`，采用函数式主题也使 variant 特性更易于实现，如 `colorMode: (type: string) => { /* if type === "primary" return { color: "blue", background: "blue" }, if type === "disable" return { /* other */ } */ }`
-4. 在 ustyled 中可以添加自定义 Api，如实现水平和垂直居中可以直接写成 `css={[u.flexCenter()]}`。
+4. 在 ustyled 中可以添加自定义 Api，如实现水平和垂直居中可以直接写成 `css={css({ flexCenter: 1 })}`。
 
 ## Maintainer
 

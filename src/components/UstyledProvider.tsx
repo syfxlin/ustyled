@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { StyleGenerator, UstyledContext } from "../types";
 import { useMediaQuery } from "../hooks/use-media-query";
 import { UstyledTheme } from "../theme";
-import { defaultTheme } from "../theme/default";
+import { defaultTheme } from "../theme/default-theme";
 import { styles } from "../api/styles";
 
 // prettier-ignore

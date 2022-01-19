@@ -1,4 +1,4 @@
-import { defaultTheme } from "../theme/default";
+import { defaultTheme } from "../theme/default-theme";
 import { responsive } from "./responsive";
 
 it("responsive", () => {

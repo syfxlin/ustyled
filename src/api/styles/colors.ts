@@ -1,6 +1,6 @@
 import { compose, style } from "../style";
 import { CSSApi, CSSProperties, CSSVar } from "../../types";
-import { color as $color } from "../util";
+import { $color } from "../util";
 
 // color
 export const color = style<"color", CSSProperties["color"]>({

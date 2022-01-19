@@ -1,4 +1,4 @@
-import { baseColors } from "./base-colors";
+import { defaultColors } from "./default-colors";
 
 export type ThFn<K, T> = (unit: K) => T | undefined;
 
@@ -19,7 +19,7 @@ export type Animations = {
   durations: ThFn<string | number, string>;
   delays: ThFn<string | number, string>;
 };
-export type Colors = typeof baseColors & Record<string, string | string[]>;
+export type Colors = typeof defaultColors & Record<string, string | string[]>;
 export type Shadows = ThFn<string, string>;
 export type Fonts = ThFn<string, string>;
 export type FontSizes = ThFn<string | number, string | number>;

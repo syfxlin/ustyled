@@ -1,5 +1,4 @@
-import { keyframes } from "@emotion/react";
-import { baseColors } from "./base-colors";
+import { defaultColors } from "./default-colors";
 import { UstyledTheme } from "./";
 
 export const defaultTheme: UstyledTheme = {
@@ -14,49 +13,50 @@ export const defaultTheme: UstyledTheme = {
   },
   animations: {
     keyframes: (unit) => {
-      const map: Record<string, string> = {
-        spin: keyframes`
-        from {
-          transform: rotate(0deg);
-        }
-
-        to {
-          transform: rotate(360deg);
-        }
-      `,
-        ping: keyframes`
-        0% {
-          transform: scale(1);
-          opacity: 1;
-        }
-
-        75%, 100% {
-          transform: scale(2);
-          opacity: 0;
-        }
-      `,
-        pulse: keyframes`
-        0%, 100% {
-          opacity: 1;
-        }
-
-        50% {
-          opacity: .5;
-        }
-      `,
-        bounce: keyframes`
-        0%, 100% {
-          transform: translateY(-25%);
-          animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        }
-
-        50% {
-          transform: translateY(0);
-          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        }
-      `,
-      };
-      return map[unit];
+      return undefined;
+      // const map: Record<string, string> = {
+      //   spin: keyframes`
+      //   from {
+      //     transform: rotate(0deg);
+      //   }
+      //
+      //   to {
+      //     transform: rotate(360deg);
+      //   }
+      // `,
+      //   ping: keyframes`
+      //   0% {
+      //     transform: scale(1);
+      //     opacity: 1;
+      //   }
+      //
+      //   75%, 100% {
+      //     transform: scale(2);
+      //     opacity: 0;
+      //   }
+      // `,
+      //   pulse: keyframes`
+      //   0%, 100% {
+      //     opacity: 1;
+      //   }
+      //
+      //   50% {
+      //     opacity: .5;
+      //   }
+      // `,
+      //   bounce: keyframes`
+      //   0%, 100% {
+      //     transform: translateY(-25%);
+      //     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+      //   }
+      //
+      //   50% {
+      //     transform: translateY(0);
+      //     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      //   }
+      // `,
+      // };
+      // return map[unit];
     },
     properties: (unit) => {
       const map: Record<string, string[]> = {
@@ -108,7 +108,7 @@ export const defaultTheme: UstyledTheme = {
       return undefined;
     },
   },
-  colors: baseColors,
+  colors: defaultColors,
   shadows: (unit) => {
     const map: Record<string, string> = {
       xs: "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)",

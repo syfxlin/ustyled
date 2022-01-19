@@ -1,7 +1,7 @@
-import { transform } from "./transform";
-import { defaultTheme } from "../theme/default";
+import { createCss } from "./create-css";
+import { defaultTheme } from "../theme/default-theme";
 import { compose, style } from "./style";
-import { color as $color } from "./util";
+import { $color } from "./util";
 
 it("test", () => {
   const color = style({
@@ -23,7 +23,7 @@ it("test", () => {
     }),
   });
 
-  const css = transform(defaultTheme, compose(color, background, width));
+  const css = createCss(defaultTheme, compose(color, background, width));
   console.log(css({ color: "blue5" }, { color: "blue9" }));
   console.log(
     css`

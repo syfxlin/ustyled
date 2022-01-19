@@ -1,6 +1,6 @@
 import { compose, style } from "../style";
 import { CSSApi, CSSProperties, CSSVar } from "../../types";
-import { border as $border, color } from "../util";
+import { $border, $color } from "../util";
 
 // border, border-(top|bottom|left|right|x|y|inline|block)
 export const border = style<"b" | "border", CSSProperties["border"]>({
@@ -192,37 +192,37 @@ export const borderBlockStyle = style<"borderBlockStyle", CSSProperties["borderB
 export const borderColor = style<"bc" | "borderColor", CSSProperties["borderColor"]>({
   prop: ["bc", "borderColor"],
   css: (value) => (theme) => ({
-    borderColor: color(value, theme),
+    borderColor: $color(value, theme),
   }),
 });
 export const borderTopColor = style<"btc" | "borderTopColor", CSSProperties["borderTopColor"]>({
   prop: ["btc", "borderTopColor"],
   css: (value) => (theme) => ({
-    borderTopColor: color(value, theme),
+    borderTopColor: $color(value, theme),
   }),
 });
 export const borderBottomColor = style<"bbc" | "borderBottomColor", CSSProperties["borderBottomColor"]>({
   prop: ["bbc", "borderBottomColor"],
   css: (value) => (theme) => ({
-    borderBottomColor: color(value, theme),
+    borderBottomColor: $color(value, theme),
   }),
 });
 export const borderLeftColor = style<"blc" | "borderLeftColor", CSSProperties["borderLeftColor"]>({
   prop: ["blc", "borderLeftColor"],
   css: (value) => (theme) => ({
-    borderLeftColor: color(value, theme),
+    borderLeftColor: $color(value, theme),
   }),
 });
 export const borderRightColor = style<"brc" | "borderRightColor", CSSProperties["borderRightColor"]>({
   prop: ["brc", "borderRightColor"],
   css: (value) => (theme) => ({
-    borderRightColor: color(value, theme),
+    borderRightColor: $color(value, theme),
   }),
 });
 export const borderXColor = style<"bxc" | "borderXColor", CSSProperties["borderLeftColor"]>({
   prop: ["bxc", "borderXColor"],
   css: (value) => (theme) => {
-    const c = color(value, theme);
+    const c = $color(value, theme);
     return {
       borderLeftColor: c,
       borderRightColor: c,
@@ -232,7 +232,7 @@ export const borderXColor = style<"bxc" | "borderXColor", CSSProperties["borderL
 export const borderYColor = style<"byc" | "borderYColor", CSSProperties["borderTopColor"]>({
   prop: ["byc", "borderYColor"],
   css: (value) => (theme) => {
-    const c = color(value, theme);
+    const c = $color(value, theme);
     return {
       borderTopColor: c,
       borderBottomColor: c,
@@ -242,13 +242,13 @@ export const borderYColor = style<"byc" | "borderYColor", CSSProperties["borderT
 export const borderInlineColor = style<"borderInlineColor", CSSProperties["borderInlineColor"]>({
   prop: ["borderInlineColor"],
   css: (value) => (theme) => ({
-    borderInlineColor: color(value, theme),
+    borderInlineColor: $color(value, theme),
   }),
 });
 export const borderBlockColor = style<"borderBlockColor", CSSProperties["borderBlockColor"]>({
   prop: ["borderBlockColor"],
   css: (value) => (theme) => ({
-    borderBlockColor: color(value, theme),
+    borderBlockColor: $color(value, theme),
   }),
 });
 
@@ -342,7 +342,7 @@ export const outlineWidth = style<"outlineWidth", CSSProperties["outlineWidth"]>
 export const outlineColor = style<"outlineColor", CSSProperties["outlineColor"]>({
   prop: ["outlineColor"],
   css: (value) => (theme) => ({
-    outlineColor: color(value, theme),
+    outlineColor: $color(value, theme),
   }),
 });
 export const outlineOffset = style<"outlineOffset", CSSProperties["outlineOffset"]>({
