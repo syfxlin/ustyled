@@ -5,8 +5,8 @@ import { color } from "../util";
 // background
 export const background = style<"bg" | "background", CSSProperties["background"]>({
   prop: ["bg", "background"],
-  css: (value) => ({
-    background: value,
+  css: (value) => (theme) => ({
+    background: color(value, theme),
   }),
 });
 

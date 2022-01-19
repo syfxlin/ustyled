@@ -93,7 +93,7 @@ export const flexShrink = style<"shrink" | "flexShrink", CSSProperties["flexShri
 export const flexBasis = style<"basis" | "flexBasis", CSSProperties["flexBasis"]>({
   prop: ["basis", "flexBasis"],
   css: (value) => (theme) => ({
-    flexBasis: theme.sizes(value),
+    flexBasis: theme.sizes(value) ?? value,
   }),
 });
 

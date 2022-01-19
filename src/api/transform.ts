@@ -59,7 +59,7 @@ export const transform = (theme: UstyledTheme, generator: StyleGenerator) => {
       return [];
     }
     if (typeof ip === "number") {
-      return [`${ip}`];
+      return [String(ip)];
     }
     if (typeof ip === "string") {
       return template(ip);

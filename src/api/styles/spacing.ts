@@ -45,19 +45,25 @@ export const marginRight = style<"mr" | "marginRight", CSSProperties["marginRigh
 // margin-x
 export const marginX = style<"mx" | "marginX", CSSProperties["marginLeft"]>({
   prop: ["mx", "marginX"],
-  css: (value) => (theme) => ({
-    marginLeft: $spacing(value, theme),
-    marginRight: $spacing(value, theme),
-  }),
+  css: (value) => (theme) => {
+    const m = $spacing(value, theme);
+    return {
+      marginLeft: m,
+      marginRight: m,
+    };
+  },
 });
 
 // margin-y
 export const marginY = style<"my" | "marginY", CSSProperties["marginTop"]>({
   prop: ["my", "marginY"],
-  css: (value) => (theme) => ({
-    marginTop: $spacing(value, theme),
-    marginBottom: $spacing(value, theme),
-  }),
+  css: (value) => (theme) => {
+    const m = $spacing(value, theme);
+    return {
+      marginTop: m,
+      marginBottom: m,
+    };
+  },
 });
 
 // margin-inline-start
@@ -119,19 +125,25 @@ export const paddingRight = style<"pr" | "paddingRight", CSSProperties["paddingR
 // padding-x
 export const paddingX = style<"px" | "paddingX", CSSProperties["paddingLeft"]>({
   prop: ["px", "paddingX"],
-  css: (value) => (theme) => ({
-    paddingLeft: $spacing(value, theme),
-    paddingRight: $spacing(value, theme),
-  }),
+  css: (value) => (theme) => {
+    const p = $spacing(value, theme);
+    return {
+      paddingLeft: p,
+      paddingRight: p,
+    };
+  },
 });
 
 // padding-y
 export const paddingY = style<"py" | "paddingY", CSSProperties["paddingTop"]>({
   prop: ["py", "paddingY"],
-  css: (value) => (theme) => ({
-    paddingTop: $spacing(value, theme),
-    paddingBottom: $spacing(value, theme),
-  }),
+  css: (value) => (theme) => {
+    const p = $spacing(value, theme);
+    return {
+      paddingTop: p,
+      paddingBottom: p,
+    };
+  },
 });
 
 // padding-inline-start

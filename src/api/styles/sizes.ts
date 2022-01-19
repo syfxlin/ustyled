@@ -5,7 +5,7 @@ import { CSSApi, CSSProperties, CSSVar } from "../../types";
 export const width = style<"w" | "width", CSSProperties["width"]>({
   prop: ["w", "width"],
   css: (value) => (theme) => ({
-    width: theme.sizes(value),
+    width: theme.sizes(value) ?? value,
   }),
 });
 
@@ -13,7 +13,7 @@ export const width = style<"w" | "width", CSSProperties["width"]>({
 export const height = style<"h" | "height", CSSProperties["height"]>({
   prop: ["h", "height"],
   css: (value) => (theme) => ({
-    height: theme.sizes(value),
+    height: theme.sizes(value) ?? value,
   }),
 });
 
@@ -21,7 +21,7 @@ export const height = style<"h" | "height", CSSProperties["height"]>({
 export const maxHeight = style<"maxH" | "maxHeight", CSSProperties["maxHeight"]>({
   prop: ["maxH", "maxHeight"],
   css: (value) => (theme) => ({
-    maxHeight: theme.sizes(value),
+    maxHeight: theme.sizes(value) ?? value,
   }),
 });
 
@@ -29,7 +29,7 @@ export const maxHeight = style<"maxH" | "maxHeight", CSSProperties["maxHeight"]>
 export const maxWidth = style<"maxW" | "maxWidth", CSSProperties["maxWidth"]>({
   prop: ["maxW", "maxWidth"],
   css: (value) => (theme) => ({
-    maxWidth: theme.sizes(value),
+    maxWidth: theme.sizes(value) ?? value,
   }),
 });
 
@@ -37,7 +37,7 @@ export const maxWidth = style<"maxW" | "maxWidth", CSSProperties["maxWidth"]>({
 export const minHeight = style<"minH" | "minHeight", CSSProperties["minHeight"]>({
   prop: ["minH", "minHeight"],
   css: (value) => (theme) => ({
-    minHeight: theme.sizes(value),
+    minHeight: theme.sizes(value) ?? value,
   }),
 });
 
@@ -45,7 +45,7 @@ export const minHeight = style<"minH" | "minHeight", CSSProperties["minHeight"]>
 export const minWidth = style<"minW" | "minWidth", CSSProperties["minWidth"]>({
   prop: ["minW", "minWidth"],
   css: (value) => (theme) => ({
-    minWidth: theme.sizes(value),
+    minWidth: theme.sizes(value) ?? value,
   }),
 });
 
@@ -53,7 +53,7 @@ export const minWidth = style<"minW" | "minWidth", CSSProperties["minWidth"]>({
 export const maskSize = style<"maskSize", CSSProperties["maskSize"]>({
   prop: ["maskSize"],
   css: (value) => (theme) => ({
-    maskSize: theme.sizes(value),
+    maskSize: theme.sizes(value) ?? value,
   }),
 });
 

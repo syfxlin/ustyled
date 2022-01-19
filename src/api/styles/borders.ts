@@ -35,17 +35,23 @@ export const borderRight = style<"br" | "borderRight", CSSProperties["borderRigh
 });
 export const borderX = style<"bx" | "borderX", CSSProperties["borderLeft"]>({
   prop: ["bx", "borderX"],
-  css: (value) => (theme) => ({
-    borderLeft: $border(value, theme),
-    borderRight: $border(value, theme),
-  }),
+  css: (value) => (theme) => {
+    const b = $border(value, theme);
+    return {
+      borderLeft: b,
+      borderRight: b,
+    };
+  },
 });
 export const borderY = style<"by" | "borderY", CSSProperties["borderTop"]>({
   prop: ["by", "borderY"],
-  css: (value) => (theme) => ({
-    borderTop: $border(value, theme),
-    borderBottom: $border(value, theme),
-  }),
+  css: (value) => (theme) => {
+    const b = $border(value, theme);
+    return {
+      borderTop: b,
+      borderBottom: b,
+    };
+  },
 });
 export const borderInline = style<"borderInline", CSSProperties["borderInline"]>({
   prop: ["borderInline"],
@@ -64,57 +70,63 @@ export const borderBlock = style<"borderBlock", CSSProperties["borderBlock"]>({
 export const borderWidth = style<"bw" | "borderWidth", CSSProperties["borderWidth"]>({
   prop: ["bw", "borderWidth"],
   css: (value) => (theme) => ({
-    borderWidth: theme.borderWidths(value),
+    borderWidth: theme.borderWidths(value) ?? value,
   }),
 });
 export const borderTopWidth = style<"btw" | "borderTopWidth", CSSProperties["borderTopWidth"]>({
   prop: ["btw", "borderTopWidth"],
   css: (value) => (theme) => ({
-    borderTopWidth: theme.borderWidths(value),
+    borderTopWidth: theme.borderWidths(value) ?? value,
   }),
 });
 export const borderBottomWidth = style<"bbw" | "borderBottomWidth", CSSProperties["borderBottomWidth"]>({
   prop: ["bbw", "borderBottomWidth"],
   css: (value) => (theme) => ({
-    borderBottomWidth: theme.borderWidths(value),
+    borderBottomWidth: theme.borderWidths(value) ?? value,
   }),
 });
 export const borderLeftWidth = style<"blw" | "borderLeftWidth", CSSProperties["borderLeftWidth"]>({
   prop: ["blw", "borderLeftWidth"],
   css: (value) => (theme) => ({
-    borderLeftWidth: theme.borderWidths(value),
+    borderLeftWidth: theme.borderWidths(value) ?? value,
   }),
 });
 export const borderRightWidth = style<"brw" | "borderRightWidth", CSSProperties["borderRightWidth"]>({
   prop: ["brw", "borderRightWidth"],
   css: (value) => (theme) => ({
-    borderRightWidth: theme.borderWidths(value),
+    borderRightWidth: theme.borderWidths(value) ?? value,
   }),
 });
 export const borderXWidth = style<"bxw" | "borderXWidth", CSSProperties["borderLeftWidth"]>({
   prop: ["bxw", "borderXWidth"],
-  css: (value) => (theme) => ({
-    borderLeftWidth: theme.borderWidths(value),
-    borderRightWidth: theme.borderWidths(value),
-  }),
+  css: (value) => (theme) => {
+    const b = theme.borderWidths(value) ?? value;
+    return {
+      borderLeftWidth: b,
+      borderRightWidth: b,
+    };
+  },
 });
 export const borderYWidth = style<"byw" | "borderYWidth", CSSProperties["borderTopWidth"]>({
   prop: ["byw", "borderYWidth"],
-  css: (value) => (theme) => ({
-    borderTopWidth: theme.borderWidths(value),
-    borderBottomWidth: theme.borderWidths(value),
-  }),
+  css: (value) => (theme) => {
+    const b = theme.borderWidths(value) ?? value;
+    return {
+      borderTopWidth: b,
+      borderBottomWidth: b,
+    };
+  },
 });
 export const borderInlineWidth = style<"borderInlineWidth", CSSProperties["borderInlineWidth"]>({
   prop: ["borderInlineWidth"],
   css: (value) => (theme) => ({
-    borderInlineWidth: theme.borderWidths(value),
+    borderInlineWidth: theme.borderWidths(value) ?? value,
   }),
 });
 export const borderBlockWidth = style<"borderBlockWidth", CSSProperties["borderBlockWidth"]>({
   prop: ["borderBlockWidth"],
   css: (value) => (theme) => ({
-    borderBlockWidth: theme.borderWidths(value),
+    borderBlockWidth: theme.borderWidths(value) ?? value,
   }),
 });
 
@@ -209,17 +221,23 @@ export const borderRightColor = style<"brc" | "borderRightColor", CSSProperties[
 });
 export const borderXColor = style<"bxc" | "borderXColor", CSSProperties["borderLeftColor"]>({
   prop: ["bxc", "borderXColor"],
-  css: (value) => (theme) => ({
-    borderLeftColor: color(value, theme),
-    borderRightColor: color(value, theme),
-  }),
+  css: (value) => (theme) => {
+    const c = color(value, theme);
+    return {
+      borderLeftColor: c,
+      borderRightColor: c,
+    };
+  },
 });
 export const borderYColor = style<"byc" | "borderYColor", CSSProperties["borderTopColor"]>({
   prop: ["byc", "borderYColor"],
-  css: (value) => (theme) => ({
-    borderTopColor: color(value, theme),
-    borderBottomColor: color(value, theme),
-  }),
+  css: (value) => (theme) => {
+    const c = color(value, theme);
+    return {
+      borderTopColor: c,
+      borderBottomColor: c,
+    };
+  },
 });
 export const borderInlineColor = style<"borderInlineColor", CSSProperties["borderInlineColor"]>({
   prop: ["borderInlineColor"],
@@ -238,62 +256,74 @@ export const borderBlockColor = style<"borderBlockColor", CSSProperties["borderB
 export const borderRadius = style<"borderRadius", CSSProperties["borderRadius"]>({
   prop: ["borderRadius"],
   css: (value) => (theme) => ({
-    borderRadius: theme.radius(value),
+    borderRadius: theme.radius(value) ?? value,
   }),
 });
 export const borderTopLeftRadius = style<"borderTopLeftRadius", CSSProperties["borderTopLeftRadius"]>({
   prop: ["borderTopLeftRadius"],
   css: (value) => (theme) => ({
-    borderTopLeftRadius: theme.radius(value),
+    borderTopLeftRadius: theme.radius(value) ?? value,
   }),
 });
 export const borderTopRightRadius = style<"borderTopRightRadius", CSSProperties["borderTopRightRadius"]>({
   prop: ["borderTopRightRadius"],
   css: (value) => (theme) => ({
-    borderTopRightRadius: theme.radius(value),
+    borderTopRightRadius: theme.radius(value) ?? value,
   }),
 });
 export const borderBottomLeftRadius = style<"borderBottomLeftRadius", CSSProperties["borderBottomLeftRadius"]>({
   prop: ["borderBottomLeftRadius"],
   css: (value) => (theme) => ({
-    borderBottomLeftRadius: theme.radius(value),
+    borderBottomLeftRadius: theme.radius(value) ?? value,
   }),
 });
 export const borderBottomRightRadius = style<"borderBottomRightRadius", CSSProperties["borderBottomRightRadius"]>({
   prop: ["borderBottomRightRadius"],
   css: (value) => (theme) => ({
-    borderBottomRightRadius: theme.radius(value),
+    borderBottomRightRadius: theme.radius(value) ?? value,
   }),
 });
 
 // border-(top|bottom|left|right)-radius
 export const borderTopRadius = style<"borderTopRadius", CSSProperties["borderTopLeftRadius"]>({
   prop: ["borderTopRadius"],
-  css: (value) => (theme) => ({
-    borderTopLeftRadius: theme.radius(value),
-    borderTopRightRadius: theme.radius(value),
-  }),
+  css: (value) => (theme) => {
+    const r = theme.radius(value) ?? value;
+    return {
+      borderTopLeftRadius: r,
+      borderTopRightRadius: r,
+    };
+  },
 });
 export const borderBottomRadius = style<"borderBottomRadius", CSSProperties["borderBottomRightRadius"]>({
   prop: ["borderBottomRadius"],
-  css: (value) => (theme) => ({
-    borderBottomLeftRadius: theme.radius(value),
-    borderBottomRightRadius: theme.radius(value),
-  }),
+  css: (value) => (theme) => {
+    const r = theme.radius(value);
+    return {
+      borderBottomLeftRadius: r,
+      borderBottomRightRadius: r,
+    };
+  },
 });
 export const borderLeftRadius = style<"borderLeftRadius", CSSProperties["borderTopLeftRadius"]>({
   prop: ["borderLeftRadius"],
-  css: (value) => (theme) => ({
-    borderTopLeftRadius: theme.radius(value),
-    borderBottomLeftRadius: theme.radius(value),
-  }),
+  css: (value) => (theme) => {
+    const r = theme.radius(value);
+    return {
+      borderTopLeftRadius: r,
+      borderBottomLeftRadius: r,
+    };
+  },
 });
 export const borderRightRadius = style<"borderRightRadius", CSSProperties["borderBottomRightRadius"]>({
   prop: ["borderRightRadius"],
-  css: (value) => (theme) => ({
-    borderTopRightRadius: theme.radius(value),
-    borderBottomRightRadius: theme.radius(value),
-  }),
+  css: (value) => (theme) => {
+    const r = theme.radius(value);
+    return {
+      borderTopRightRadius: r,
+      borderBottomRightRadius: r,
+    };
+  },
 });
 
 // outline
@@ -306,7 +336,7 @@ export const outline = style<"outline", CSSProperties["outline"]>({
 export const outlineWidth = style<"outlineWidth", CSSProperties["outlineWidth"]>({
   prop: ["outlineWidth"],
   css: (value) => (theme) => ({
-    outlineWidth: theme.borderWidths(value),
+    outlineWidth: theme.borderWidths(value) ?? value,
   }),
 });
 export const outlineColor = style<"outlineColor", CSSProperties["outlineColor"]>({
@@ -318,7 +348,7 @@ export const outlineColor = style<"outlineColor", CSSProperties["outlineColor"]>
 export const outlineOffset = style<"outlineOffset", CSSProperties["outlineOffset"]>({
   prop: ["outlineOffset"],
   css: (value) => (theme) => ({
-    outlineOffset: theme.borderWidths(value),
+    outlineOffset: theme.borderWidths(value) ?? value,
   }),
 });
 export const outlineStyle = style<"outlineStyle", CSSProperties["outlineStyle"]>({

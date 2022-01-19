@@ -1,13 +1,6 @@
-import { Keyframes, keyframes } from "@emotion/react";
+import { keyframes } from "@emotion/react";
 import { baseColors } from "./base-colors";
 import { UstyledTheme } from "./";
-
-const choose = <T>(unit: T, _default?: T | null) => {
-  if (_default === null) {
-    return undefined;
-  }
-  return _default ?? unit;
-};
 
 export const defaultTheme: UstyledTheme = {
   colorMode: "light",
@@ -20,8 +13,8 @@ export const defaultTheme: UstyledTheme = {
     xl: 1536,
   },
   animations: {
-    keyframes: (unit, _default) => {
-      const map: Record<string, Keyframes> = {
+    keyframes: (unit) => {
+      const map: Record<string, string> = {
         spin: keyframes`
         from {
           transform: rotate(0deg);
@@ -63,9 +56,9 @@ export const defaultTheme: UstyledTheme = {
         }
       `,
       };
-      return map[unit] ?? choose(unit, _default);
+      return map[unit];
     },
-    properties: (unit, _default) => {
+    properties: (unit) => {
       const map: Record<string, string[]> = {
         none: ["none"],
         all: ["all"],
@@ -86,9 +79,9 @@ export const defaultTheme: UstyledTheme = {
           "backdrop-filter",
         ],
       };
-      return map[unit]?.join(", ") ?? choose(unit, _default);
+      return map[unit]?.join(", ");
     },
-    timingFns: (unit, _default) => {
+    timingFns: (unit) => {
       const map: Record<string, string> = {
         default: "ease",
         linear: "linear",
@@ -100,23 +93,23 @@ export const defaultTheme: UstyledTheme = {
         pulse: "cubic-bezier(0.4, 0, 0.6, 1)",
         bounce: "ease",
       };
-      return map[unit] ?? choose(unit, _default);
+      return map[unit];
     },
-    durations: (unit, _default) => {
+    durations: (unit) => {
       if (typeof unit === "number") {
         return `${unit}s`;
       }
-      return choose(unit, _default);
+      return undefined;
     },
-    delays: (unit, _default) => {
+    delays: (unit) => {
       if (typeof unit === "number") {
         return `${unit}s`;
       }
-      return choose(unit, _default);
+      return undefined;
     },
   },
   colors: baseColors,
-  shadows: (unit, _default) => {
+  shadows: (unit) => {
     const map: Record<string, string> = {
       xs: "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)",
       sm: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 10px 15px -5px, rgba(0, 0, 0, 0.04) 0px 7px 7px -5px",
@@ -124,33 +117,33 @@ export const defaultTheme: UstyledTheme = {
       lg: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 28px 23px -7px, rgba(0, 0, 0, 0.04) 0px 12px 12px -7px",
       xl: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 36px 28px -7px, rgba(0, 0, 0, 0.04) 0px 17px 17px -7px",
     };
-    return map[unit] ?? choose(unit, _default);
+    return map[unit];
   },
-  fonts: (unit, _default) => {
+  fonts: (unit) => {
     const map: Record<string, string> = {
       sans: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
       mono: `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
       serif: `Georgia, Cambria, "Times New Roman", Times, serif`,
     };
-    return map[unit] ?? choose(unit, _default);
+    return map[unit];
   },
-  fontSizes: (unit, _default) => {
+  fontSizes: (unit) => {
     if (typeof unit === "number") {
       return `${unit}rem`;
     }
     // TODO: h1-h6
-    return choose(unit, _default);
+    return undefined;
   },
-  letterSpacings: (unit, _default) => {
+  letterSpacings: (unit) => {
     if (typeof unit === "number") {
       return `${unit * 0.025}rem`;
     }
-    return choose(unit, _default);
+    return undefined;
   },
-  lineHeights: (unit, _default) => {
-    return choose(unit, _default);
+  lineHeights: () => {
+    return undefined;
   },
-  sizes: (unit, _default) => {
+  sizes: (unit) => {
     if (typeof unit === "number") {
       return `${unit * 0.25}rem`;
     }
@@ -161,15 +154,15 @@ export const defaultTheme: UstyledTheme = {
       vw: "100vw",
       vh: "100vh",
     };
-    return map[unit] ?? choose(unit, _default);
+    return map[unit];
   },
-  spacings: (unit, _default) => {
+  spacings: (unit) => {
     if (typeof unit === "number") {
       return `${unit * 0.25}rem`;
     }
-    return choose(unit, _default);
+    return undefined;
   },
-  radius: (unit, _default) => {
+  radius: (unit) => {
     if (typeof unit === "number") {
       return `${unit * 0.25}rem`;
     }
@@ -178,12 +171,12 @@ export const defaultTheme: UstyledTheme = {
       half: "50%",
       full: "9999px",
     };
-    return map[unit] ?? choose(unit, _default);
+    return map[unit];
   },
-  borderWidths: (unit, _default) => {
+  borderWidths: (unit) => {
     if (typeof unit === "number") {
       return `${unit}px`;
     }
-    return choose(unit, _default);
+    return undefined;
   },
 };

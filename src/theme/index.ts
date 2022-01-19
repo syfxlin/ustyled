@@ -1,6 +1,6 @@
 import { baseColors } from "./base-colors";
 
-export type ThFn<K, T> = (unit: K, _default?: T | null) => T | undefined;
+export type ThFn<K, T> = (unit: K) => T | undefined;
 
 export type ColorMode = "light" | "dark";
 

@@ -69,7 +69,7 @@ export const zIndex = style<"zIndex", CSSProperties["zIndex"]>({
 export const top = style<"top", CSSProperties["top"]>({
   prop: ["top"],
   css: (value) => (theme) => ({
-    top: theme.spacings(value),
+    top: theme.spacings(value) ?? value,
   }),
 });
 
@@ -77,7 +77,7 @@ export const top = style<"top", CSSProperties["top"]>({
 export const bottom = style<"bottom", CSSProperties["bottom"]>({
   prop: ["bottom"],
   css: (value) => (theme) => ({
-    bottom: theme.spacings(value),
+    bottom: theme.spacings(value) ?? value,
   }),
 });
 
@@ -85,7 +85,7 @@ export const bottom = style<"bottom", CSSProperties["bottom"]>({
 export const left = style<"left", CSSProperties["left"]>({
   prop: ["left"],
   css: (value) => (theme) => ({
-    left: theme.spacings(value),
+    left: theme.spacings(value) ?? value,
   }),
 });
 
@@ -93,7 +93,7 @@ export const left = style<"left", CSSProperties["left"]>({
 export const right = style<"right", CSSProperties["right"]>({
   prop: ["right"],
   css: (value) => (theme) => ({
-    right: theme.spacings(value),
+    right: theme.spacings(value) ?? value,
   }),
 });
 

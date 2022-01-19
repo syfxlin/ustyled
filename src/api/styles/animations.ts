@@ -5,12 +5,12 @@ import { CSSApi, CSSProperties, CSSVar } from "../../types";
 export const animation = style<"animation", CSSProperties["animation"]>({
   prop: ["animation"],
   css: (value) => (theme) => {
-    value = `${value}`;
+    value = String(value);
     const kf = theme.animations.keyframes(value);
     if (kf) {
-      const duration = theme.animations.durations(value, "1s");
-      const timing = theme.animations.timingFns(value, "linear");
-      const delay = theme.animations.delays(value, "0s");
+      const duration = theme.animations.durations(value) ?? "1s";
+      const timing = theme.animations.timingFns(value) ?? "linear";
+      const delay = theme.animations.delays(value) ?? "0s";
       return {
         animation: `${kf} ${duration} ${timing} ${delay} infinite`,
       };
@@ -25,7 +25,7 @@ export const animation = style<"animation", CSSProperties["animation"]>({
 export const animationTimingFunction = style<"animationTimingFunction", CSSProperties["animationTimingFunction"]>({
   prop: ["animationTimingFunction"],
   css: (value) => (theme) => ({
-    animationTimingFunction: theme.animations.timingFns(`${value}`),
+    animationTimingFunction: theme.animations.timingFns(String(value)) ?? value,
   }),
 });
 
@@ -33,7 +33,7 @@ export const animationTimingFunction = style<"animationTimingFunction", CSSPrope
 export const animationDelay = style<"animationDelay", CSSProperties["animationDelay"]>({
   prop: ["animationDelay"],
   css: (value) => (theme) => ({
-    animationDelay: theme.animations.delays(value),
+    animationDelay: theme.animations.delays(value) ?? value,
   }),
 });
 
@@ -41,7 +41,7 @@ export const animationDelay = style<"animationDelay", CSSProperties["animationDe
 export const animationDuration = style<"animationDuration", CSSProperties["animationDuration"]>({
   prop: ["animationDuration"],
   css: (value) => (theme) => ({
-    animationDuration: theme.animations.durations(value),
+    animationDuration: theme.animations.durations(value) ?? value,
   }),
 });
 
@@ -49,7 +49,7 @@ export const animationDuration = style<"animationDuration", CSSProperties["anima
 export const animationName = style<"animationName", CSSProperties["animationName"]>({
   prop: ["animationName"],
   css: (value) => (theme) => ({
-    animationName: theme.animations.keyframes(`${value}`),
+    animationName: theme.animations.keyframes(String(value)) ?? value,
   }),
 });
 
