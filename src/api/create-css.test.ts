@@ -33,4 +33,10 @@ it("test", () => {
       width: 1;
     `
   );
+  console.log(
+    css`
+      width: ${2};
+      color: primary1;
+    `
+  );
 });

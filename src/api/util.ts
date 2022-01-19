@@ -3,10 +3,13 @@ import { UstyledTheme } from "../theme";
 export const $color = (color: string | number | undefined, theme: UstyledTheme): string => {
   const parse = (value: string) => {
     const m = value.match(/^([a-zA-Z]+)(\d+)?$/);
-    if (!m || !theme.colors[m[1]]) {
+    if (!m) {
       return undefined;
     }
     const [, name, level] = m;
+    if (name !== "primary" && !theme.colors[name]) {
+      return undefined;
+    }
     if (level === undefined) {
       return theme.colors[name] as string;
     }

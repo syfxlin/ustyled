@@ -18,7 +18,7 @@ export const createCss = (theme: UstyledTheme, generator: StyleGenerator) => {
   const template = (raw: string) => {
     let match: RegExpExecArray | null;
     let lastIndex = 0;
-    let values: Array<string | CSSObject> = [];
+    const values: Array<string | CSSObject> = [];
     while ((match = PROP_REGEXP.exec(raw))) {
       const [, prop, colon, value, imp, semi] = match;
       const getter = api[kebabToCamel(prop)];
@@ -72,18 +72,29 @@ export const createCss = (theme: UstyledTheme, generator: StyleGenerator) => {
   };
 
   const fun: CSSFunction = (first, ...args) => {
-    const values: any[] = [];
+    const values: Array<Array<string | CSSObject>> = [];
 
     // @ts-ignore
     const stringMode = !(first == null || first.raw === undefined);
 
     if (stringMode) {
       const strings = first as TemplateStringsArray;
-      values.push(template(strings[0]));
+      let string = strings[0];
       for (let i = 0; i < args.length; i++) {
-        values.push(interpolation(args[i]));
-        values.push(template(strings[i + 1]));
+        const arg = args[0];
+        if (arg === undefined || arg === null) {
+          continue;
+        }
+        if (typeof arg === "boolean" || typeof arg === "number" || typeof arg === "string") {
+          string += arg;
+          string += strings[i + 1];
+        } else {
+          values.push(template(string));
+          values.push(interpolation(arg));
+          string = strings[i + 1];
+        }
       }
+      values.push(template(string));
     } else {
       const ip = first as CSSInterpolation;
       values.push(interpolation(ip));
