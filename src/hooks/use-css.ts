@@ -1,7 +1,8 @@
 import { useUstyled } from "./use-ustyled";
 import { transform } from "../api/transform";
+import { useMemo } from "react";
 
 export const useCss = () => {
   const [ctx] = useUstyled();
-  return transform(ctx.theme, ctx.generator);
+  return useMemo(() => transform(ctx.theme, ctx.generator), [ctx]);
 };

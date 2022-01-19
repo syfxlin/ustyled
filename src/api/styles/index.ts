@@ -10,6 +10,10 @@ import { interactivity, InteractivityApi, InteractivityVar } from "./interactivi
 import { layout, LayoutApi, LayoutVar } from "./layout";
 import { sizes, SizesApi, SizesVar } from "./sizes";
 import { spacing, SpacingApi, SpacingVar } from "./spacing";
+import { transforms, TransformsApi, TransformsVar } from "./transforms";
+import { transition, TransitionsApi, TransitionsVar } from "./transitions";
+import { typography, TypographyApi, TypographyVar } from "./typography";
+import { other, OtherApi, OtherVar } from "./other";
 
 export const styles = compose(
   animations,
@@ -22,7 +26,11 @@ export const styles = compose(
   interactivity,
   layout,
   sizes,
-  spacing
+  spacing,
+  transforms,
+  transition,
+  typography,
+  other
 );
 
 export type StylesApi = AnimationsApi &
@@ -35,7 +43,11 @@ export type StylesApi = AnimationsApi &
   InteractivityApi &
   LayoutApi &
   SizesApi &
-  SpacingApi;
+  SpacingApi &
+  TransformsApi &
+  TransitionsApi &
+  TypographyApi &
+  OtherApi;
 
 export type StylesVar = AnimationsVar &
   BackgroundsVar &
@@ -47,7 +59,11 @@ export type StylesVar = AnimationsVar &
   InteractivityVar &
   LayoutVar &
   SizesVar &
-  SpacingVar;
+  SpacingVar &
+  TransformsVar &
+  TransitionsVar &
+  TypographyVar &
+  OtherVar;
 
 declare module "../../types" {
   // @ts-ignore

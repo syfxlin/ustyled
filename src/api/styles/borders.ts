@@ -358,6 +358,14 @@ export const outlineStyle = style<"outlineStyle", CSSProperties["outlineStyle"]>
   }),
 });
 
+// border-collapse
+export const borderCollapse = style<"borderCollapse", CSSProperties["borderCollapse"]>({
+  prop: ["borderCollapse"],
+  css: (value) => ({
+    borderCollapse: value,
+  }),
+});
+
 export const borders = compose(
   border,
   borderTop,
@@ -408,7 +416,8 @@ export const borders = compose(
   outlineWidth,
   outlineColor,
   outlineOffset,
-  outlineStyle
+  outlineStyle,
+  borderCollapse
 );
 
 export type BordersApi = CSSApi<typeof border> &
@@ -460,6 +469,7 @@ export type BordersApi = CSSApi<typeof border> &
   CSSApi<typeof outlineWidth> &
   CSSApi<typeof outlineColor> &
   CSSApi<typeof outlineOffset> &
-  CSSApi<typeof outlineStyle>;
+  CSSApi<typeof outlineStyle> &
+  CSSApi<typeof borderCollapse>;
 
 export type BordersVar = CSSVar<BordersApi>;

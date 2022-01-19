@@ -34,7 +34,6 @@ export interface CSSFunction {
   (...args: Array<CSSInterpolation>): Array<string | CSSObject>;
   (template: TemplateStringsArray, ...args: Array<CSSInterpolation>): Array<string | CSSObject>;
 }
-export type UseCSS = (theme: UstyledTheme, generator: StyleGenerator) => CSSFunction;
 export type CSSApi<T extends (...args: any) => any> = ReturnType<T>;
 export type CSSVar<T extends Record<string, StyleFn>> = {
   [K in keyof T]?: Parameters<T[K]>[0];

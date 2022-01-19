@@ -1,8 +1,10 @@
-import React from "react";
-import { useCss } from "../src/hooks/useCss";
+import React, { useState } from "react";
+import { useCss } from "../src/hooks/use-css";
 
 const Demo: React.FC = () => {
   const css = useCss();
+  const [count, setCount] = useState(0);
+
   return (
     <div>
       <div
@@ -47,9 +49,15 @@ const Demo: React.FC = () => {
           justify: center;
           align: center;
           m: 10 20;
+          transition: all;
+
+          &:hover {
+            width: 50;
+            height: 50;
+          }
         `}
       >
-        Text
+        <button onClick={() => setCount(count + 1)}>{count}</button>
       </div>
     </div>
   );
