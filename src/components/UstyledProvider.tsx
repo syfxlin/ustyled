@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
-import { StyleGenerator, UstyledContext } from "../types";
+import { UstyledApi, UstyledContext } from "../types";
 import { useMediaQuery } from "../hooks/use-media-query";
 import { UstyledTheme } from "../theme";
 import { defaultTheme } from "../theme/default-theme";
 import { styles } from "../api/styles";
+import { ats } from "../api/at";
 
 // prettier-ignore
 // @ts-ignore
@@ -11,13 +12,13 @@ export const UstyledCtx = createContext<[UstyledContext, React.Dispatch<React.Se
 
 export type UstyledThemeProviderProps = {
   theme?: UstyledTheme;
-  generator?: StyleGenerator;
+  api?: UstyledApi;
 };
 
 export const UstyledProvider: React.FC<UstyledThemeProviderProps> = (props) => {
   const [ctx, setCtx] = useState<UstyledContext>({
     theme: props.theme ?? defaultTheme,
-    generator: props.generator ?? styles,
+    api: props.api ?? { style: styles, at: ats },
   });
 
   // auto change color mode

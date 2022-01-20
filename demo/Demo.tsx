@@ -1,8 +1,8 @@
 import React from "react";
-import { useCss } from "../src/hooks/use-css";
+import { useU } from "../src/hooks/use-u";
 
 const Demo: React.FC = () => {
-  const css = useCss();
+  const { css } = useU();
 
   return (
     <div>
@@ -16,6 +16,10 @@ const Demo: React.FC = () => {
           border-top: 20px solid yellow5;
           outline: 10 solid red5;
           color: red7;
+
+          @media (min-width: md) and (max-width: md) {
+            color: #000;
+          }
 
           ${{ height: "200px" }}
 
@@ -33,7 +37,12 @@ const Demo: React.FC = () => {
             width: "100px",
             height: "100px",
           },
-          [{ width: "200px" }, { height: "200px" }]
+          [{ width: "200px" }, { height: "200px" }],
+          {
+            "&:hover": {
+              bgColor: ["blue7", "green7"],
+            },
+          }
         )}
       />
     </div>

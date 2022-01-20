@@ -11,7 +11,7 @@ import { layout, LayoutApi, LayoutVar } from "./layout";
 import { sizes, SizesApi, SizesVar } from "./sizes";
 import { spacing, SpacingApi, SpacingVar } from "./spacing";
 import { transforms, TransformsApi, TransformsVar } from "./transforms";
-import { transition, TransitionsApi, TransitionsVar } from "./transitions";
+import { transitions, TransitionsApi, TransitionsVar } from "./transitions";
 import { typography, TypographyApi, TypographyVar } from "./typography";
 import { other, OtherApi, OtherVar } from "./other";
 
@@ -28,7 +28,7 @@ export const styles = compose(
   sizes,
   spacing,
   transforms,
-  transition,
+  transitions,
   typography,
   other
 );
