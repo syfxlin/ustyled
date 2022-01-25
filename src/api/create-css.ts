@@ -2,6 +2,7 @@ import { CreateCSS, CSSFunction, CSSInterpolation, CSSObject, CSSVariables } fro
 import { kebabToCamel } from "../utils/css";
 import deepmerge from "deepmerge";
 import { responsive } from "./responsive";
+import { $num } from "./util";
 
 // ([-\w]+)                  属性名称，只包含 -、字母、数字，group 1
 // (\s*:\s*)                 分隔符和周围空白字符，group 2
@@ -41,11 +42,7 @@ export const createCss: CreateCSS = ({ theme, styles, ats }) => {
       } else {
         const getter = styles[kebabToCamel(prop)];
         if (getter) {
-          let val: number | string = `${value}${imp || ""}`.trim();
-          // @ts-ignore
-          if (val !== "" && !isNaN(val)) {
-            val = parseFloat(val);
-          }
+          const val: number | string = $num(`${value}${imp || ""}`.trim());
           values.push(raw.slice(lastIndex, match.index));
           values.push(getter(val));
           lastIndex = match.index + match[0].length;

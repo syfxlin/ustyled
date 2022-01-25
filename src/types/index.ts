@@ -1,5 +1,7 @@
 import * as CSS from "csstype";
 import { UstyledTheme } from "../theme";
+import { StylesApi } from "../api/styles";
+import { AtsApi } from "../api/at";
 
 export type CSSProperties = CSS.Properties<string | number>;
 
@@ -53,8 +55,8 @@ export type Responsive<T> = {
 };
 
 export type UstyledApi = {
-  style: StyleGenerator;
-  at: AtGenerator;
+  style: StyleGenerator<keyof StylesApi>;
+  at: AtGenerator<keyof AtsApi>;
 };
 export type UstyledContext = {
   theme: UstyledTheme;

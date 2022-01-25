@@ -1,8 +1,8 @@
 import React from "react";
-import { useU } from "../src/hooks/use-u";
+import { useU } from "../src";
 
 const Demo: React.FC = () => {
-  const { css } = useU();
+  const { css, styles: s } = useU();
 
   return (
     <div>
@@ -45,6 +45,7 @@ const Demo: React.FC = () => {
           }
         )}
       />
+      <div css={[s.bgColor("blue5"), s.w("100px"), s.h("100px")]} />
     </div>
   );
 };
