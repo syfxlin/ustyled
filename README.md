@@ -27,7 +27,7 @@ npm i @syfxlin/ustyled
 
 ```typescript jsx
 import React from "react";
-import { useCss, UstyledProvider } from "@syfxlin/ustyled";
+import { useU, UstyledProvider } from "@syfxlin/ustyled";
 
 const Root: React.FC = () => {
   return (
@@ -38,7 +38,7 @@ const Root: React.FC = () => {
 };
 
 const Demo: React.FC = () => {
-  const css = useCss();
+  const { css, styles: s } = useU();
 
   return (
     <div>
@@ -52,9 +52,10 @@ const Demo: React.FC = () => {
           border-top: 20px solid yellow5;
           outline: 10 solid red5;
           color: red7;
-
+          @media (min-width: md) and (max-width: md) {
+            color: #000;
+          }
           ${{ height: "200px" }}
-
           ${css`
             width: 200px;
           `}
@@ -69,9 +70,15 @@ const Demo: React.FC = () => {
             width: "100px",
             height: "100px",
           },
-          [{ width: "200px" }, { height: "200px" }]
+          [{ width: "200px" }, { height: "200px" }],
+          {
+            "&:hover": {
+              bgColor: ["blue7", "green7"],
+            },
+          }
         )}
       />
+      <div css={[s.bgColor("blue5"), s.w("100px"), s.h("100px")]} />
     </div>
   );
 };
