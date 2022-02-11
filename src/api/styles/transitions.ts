@@ -6,7 +6,7 @@ export const transition = style<"transition", CSSProperties["transition"]>({
   prop: ["transition"],
   css: (value) => (theme) => {
     value = String(value);
-    const properties = theme.animations.properties(value) ?? value;
+    const properties = theme.animations.properties(value);
     if (properties) {
       const duration = theme.animations.durations(value) ?? "1s";
       const timing = theme.animations.timingFns(value) ?? "linear";
