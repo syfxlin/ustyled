@@ -1,41 +1,30 @@
-import { compose, style } from "../style";
-import { CSSApi, CSSProperties, CSSVar } from "../../types";
-import { $color } from "../util";
+import { style, StyleApi } from "../style";
+import { defaultColors } from "../../ctx/default-colors";
 
-// color
-export const color = style<"color", CSSProperties["color"]>({
-  prop: ["color"],
-  css: (value) => (theme) => ({
-    color: $color(value, theme),
-  }),
+export const colors = style({
+  prop: ["c", "color"],
+  css: (ctx) => (value: string, dark?: string) => {
+    const parse = (value: string) => {
+      const m = value.match(/^([a-zA-Z]+)(\d+)?$/);
+      if (!m) {
+        return undefined;
+      }
+      const [, name, level] = m;
+      if (name !== "primary" && !defaultColors[name]) {
+        return undefined;
+      }
+      if (level === undefined) {
+        return defaultColors[name] as string;
+      }
+      return defaultColors[name === "primary" ? ctx.primary : name][parseInt(level)];
+    };
+
+    if (!dark || ctx.mode === "light") {
+      return parse(value) ?? value;
+    } else {
+      return parse(dark) ?? dark;
+    }
+  },
 });
 
-// fill
-export const fill = style<"fill", CSSProperties["fill"]>({
-  prop: ["fill"],
-  css: (value) => (theme) => ({
-    fill: $color(value, theme),
-  }),
-});
-
-// stroke
-export const stroke = style<"stroke", CSSProperties["stroke"]>({
-  prop: ["stroke"],
-  css: (value) => (theme) => ({
-    stroke: $color(value, theme),
-  }),
-});
-
-// opacity
-export const opacity = style<"opacity", CSSProperties["opacity"]>({
-  prop: ["opacity"],
-  css: (value) => ({
-    opacity: value,
-  }),
-});
-
-export const colors = compose(color, fill, stroke, opacity);
-
-export type ColorsApi = CSSApi<typeof color> & CSSApi<typeof fill> & CSSApi<typeof stroke> & CSSApi<typeof opacity>;
-
-export type ColorsVar = CSSVar<ColorsApi>;
+export type ColorsApi = StyleApi<typeof colors>;

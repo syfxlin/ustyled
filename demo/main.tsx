@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { UstyledProvider } from "../src/components/UstyledProvider";
+import { UstyledProvider } from "../src";
 import Demo from "./Demo";
 
 const Root: React.FC = () => {

@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { UstyledCtx } from "../components/UstyledProvider";
+import { UstyledContext } from "../components/UstyledProvider";
 
 export const useUstyled = () => {
-  const ctx = useContext(UstyledCtx);
+  const ctx = useContext(UstyledContext);
   if (!ctx) {
     throw new Error(
       "useUstyled hook was called outside of context, make sure your app is wrapped with UstyledProvider component"

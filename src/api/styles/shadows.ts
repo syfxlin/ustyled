@@ -1,25 +1,17 @@
-import { compose, style } from "../style";
-import { CSSApi, CSSProperties, CSSVar } from "../../types";
-import { $border } from "../util";
+import { style, StyleApi } from "../style";
 
-// box-shadow
-export const boxShadow = style<"boxShadow", CSSProperties["boxShadow"]>({
-  prop: ["boxShadow"],
-  css: (value) => (theme) => ({
-    boxShadow: $border(value, theme),
-  }),
+export const shadows = style({
+  prop: ["sha", "shadow"],
+  css: () => (value: string) => {
+    const map: Record<string, string> = {
+      xs: "0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1)",
+      sm: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 10px 15px -5px, rgba(0, 0, 0, 0.04) 0px 7px 7px -5px",
+      md: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px",
+      lg: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 28px 23px -7px, rgba(0, 0, 0, 0.04) 0px 12px 12px -7px",
+      xl: "0 1px 3px rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 0px 36px 28px -7px, rgba(0, 0, 0, 0.04) 0px 17px 17px -7px",
+    };
+    return map[value] ?? value;
+  },
 });
 
-// text-shadow
-export const textShadow = style<"textShadow", CSSProperties["textShadow"]>({
-  prop: ["textShadow"],
-  css: (value) => (theme) => ({
-    textShadow: $border(value, theme),
-  }),
-});
-
-export const shadows = compose(boxShadow, textShadow);
-
-export type ShadowsApi = CSSApi<typeof boxShadow> & CSSApi<typeof textShadow>;
-
-export type ShadowsVar = CSSVar<ShadowsApi>;
+export type ShadowsApi = StyleApi<typeof shadows>;

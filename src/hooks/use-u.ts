@@ -1,39 +1,33 @@
 import { useUstyled } from "./use-ustyled";
 import { useCallback, useMemo } from "react";
-import { createCss } from "../api/create-css";
-import { ColorMode } from "../theme";
+import { ColorMode } from "../ctx";
+import { createCss } from "../css";
 
 export const useU = () => {
-  const [ctx, setCtx] = useUstyled();
+  const [theme, setTheme] = useUstyled();
 
-  const props = useMemo(
-    () => ({
-      theme: ctx.theme,
-      styles: ctx.api.style(ctx.theme),
-      ats: ctx.api.at(ctx.theme),
-    }),
-    [ctx]
-  );
+  const ctx = useMemo(() => theme.ctx, [theme.ctx]);
+  const api = useMemo(() => theme.api(theme.ctx), [theme.api, theme.ctx]);
+  const css = useMemo(() => createCss(api), [api]);
 
-  const css = useMemo(() => createCss(props), [props]);
-
-  const setColorMode = useCallback(
-    (c?: ColorMode) => {
-      setCtx((prev) => ({
+  const mode = useMemo(() => theme.ctx.mode, [theme.ctx.mode]);
+  const setMode = useCallback(
+    (c?: ColorMode) =>
+      setTheme((prev) => ({
         ...prev,
-        theme: {
-          ...prev.theme,
-          colorMode: c ?? (prev.theme.colorMode === "light" ? "dark" : "light"),
+        ctx: {
+          ...prev.ctx,
+          mode: c ?? (prev.ctx.mode === "light" ? "dark" : "light"),
         },
-      }));
-    },
-    [setCtx]
+      })),
+    [setTheme]
   );
 
   return {
-    ...props,
     css,
-    colorMode: ctx.theme.colorMode,
-    setColorMode,
+    ctx,
+    api,
+    mode,
+    setMode,
   };
 };

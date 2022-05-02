@@ -1,48 +1,26 @@
-import { AtFn, AtGenerator, AtOptions, CSSObject, StyleFn, StyleGenerator, StyleOptions } from "../types";
-import { UstyledTheme } from "../theme";
+import { CSSScalar } from "../types";
+import { UstyledCtx } from "../ctx";
+
+export type StyleOptions<K extends string, V extends Array<any>> = {
+  prop: K | K[];
+  css: (ctx: UstyledCtx) => (...value: V) => CSSScalar;
+};
+
+export type StyleGenerator<K extends string, V extends Array<any>> = (theme: UstyledCtx) => {
+  [P in K]: (...value: V) => CSSScalar;
+};
+
+export type StyleApi<T extends (...args: any) => any> = ReturnType<T>;
+
+export const style = <K extends string = string, V extends Array<any> = any>(
+  opts: StyleOptions<K, V>
+): StyleGenerator<K, V> => {
+  return (ctx) => {
+    const prop = typeof opts.prop === "string" ? [opts.prop] : opts.prop;
+    return prop.reduce((a, i) => Object.assign(a, { [i]: opts.css(ctx) }), {}) as any;
+  };
+};
 
 export const compose = (...generators: any[]): any => {
-  return (theme: UstyledTheme) => generators.map((generator) => generator(theme)).reduce(Object.assign, {});
-};
-
-export const style = <K extends string = string, V = any>(opts: StyleOptions<K, V>): StyleGenerator<K, V> => {
-  return (theme) => {
-    const prop = typeof opts.prop === "string" ? [opts.prop] : opts.prop;
-    const getter = (value: V): CSSObject => {
-      if (value === null || value === undefined) {
-        return {};
-      }
-      // @ts-ignore
-      const obj = opts.css(value);
-      const css = typeof obj === "function" ? obj(theme) : obj;
-      return css ?? {};
-    };
-
-    const generators: Record<string, StyleFn<V>> = {};
-    for (const key of prop) {
-      generators[key] = getter;
-    }
-    return generators;
-  };
-};
-
-export const at = <K extends string = string, V = any>(opts: AtOptions<K, V>): AtGenerator<K, V> => {
-  return (theme) => {
-    const prop = typeof opts.prop === "string" ? [opts.prop] : opts.prop;
-    const getter = (value: V): string => {
-      if (value === null || value === undefined) {
-        return "";
-      }
-      // @ts-ignore
-      const obj = opts.rule(value);
-      const rule = typeof obj === "function" ? obj(theme) : obj;
-      return rule ?? "";
-    };
-
-    const generators: Record<string, AtFn<V>> = {};
-    for (const key of prop) {
-      generators[key] = getter;
-    }
-    return generators;
-  };
+  return (ctx: UstyledCtx) => generators.map((generator) => generator(ctx)).reduce(Object.assign, {});
 };
