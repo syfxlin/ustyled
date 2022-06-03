@@ -25,7 +25,7 @@ const Demo: React.FC = () => {
       </div>
       <div
         css={css({
-          backgroundColor: ".c(blue5)",
+          backgroundColor: ".c(blue5[0.7])",
           width: "100px",
           height: "100px",
         })}
