@@ -6,7 +6,7 @@ export const colors = style({
   prop: ["c", "color"],
   css: (ctx) => (value: string, dark?: string) => {
     const parse = (value: string) => {
-      const m = value.match(/^([a-zA-Z]+)(\d+)?(?:\[([\d.]+)])?$/);
+      const m = value.match(/^([a-zA-Z]+)(\d+)?(?:[_-](\d+))?$/);
       if (!m) {
         return undefined;
       }
@@ -23,7 +23,7 @@ export const colors = style({
       if (opacity === undefined) {
         return color;
       } else {
-        return alpha(color, parseFloat(opacity));
+        return alpha(color, parseInt(opacity) / 10);
       }
     };
 
