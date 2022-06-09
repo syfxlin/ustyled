@@ -24,6 +24,7 @@ export * from "./ctx/index";
 export * from "./hooks/use-media-query";
 export * from "./hooks/use-u";
 export * from "./hooks/use-ustyled";
+export * from "./hooks/use-responsive";
 
 // types
 export * from "./types/index";
