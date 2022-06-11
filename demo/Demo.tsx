@@ -19,6 +19,14 @@ const Demo: React.FC = () => {
           .up(md) {
             color: .c("red7", "blue7");
           }
+
+          .light() {
+            height: .s(50);
+          }
+
+          .dark() {
+            height: .s(75);
+          }
         `}
       >
         Text

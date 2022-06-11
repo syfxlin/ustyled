@@ -1,3 +1,4 @@
+import { modes, ModesApi } from "./rules/modes";
 import { responsive, ResponsiveApi } from "./rules/responsive";
 import { animations, AnimationsApi } from "./styles/animations";
 import { borders, BordersApi } from "./styles/borders";
@@ -7,6 +8,13 @@ import { shadows, ShadowsApi } from "./styles/shadows";
 import { sizes, SizesApi } from "./styles/sizes";
 import { compose } from "./style";
 
-export const api = compose(responsive, animations, borders, colors, fonts, shadows, sizes);
+export const api = compose(modes, responsive, animations, borders, colors, fonts, shadows, sizes);
 
-export type UstyledApi = ResponsiveApi & AnimationsApi & BordersApi & ColorsApi & FontsApi & ShadowsApi & SizesApi;
+export type UstyledApi = ModesApi &
+  ResponsiveApi &
+  AnimationsApi &
+  BordersApi &
+  ColorsApi &
+  FontsApi &
+  ShadowsApi &
+  SizesApi;
