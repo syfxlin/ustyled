@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 import { UstyledTheme } from "../types";
-import { ColorMode, ctx } from "../ctx";
+import { ctx } from "../ctx";
 import { api } from "../api";
 
 // prettier-ignore
@@ -14,9 +14,6 @@ export type UstyledThemeProviderProps = React.PropsWithChildren<{
 
 export const UstyledProvider: React.FC<UstyledThemeProviderProps> = (props) => {
   const [context, setContext] = useState<UstyledTheme>({
-    mode:
-      (localStorage.getItem(ColorModeStorageKey) as ColorMode) ??
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
     ctx: props.theme?.ctx ?? ctx,
     api: props.theme?.api ?? api,
   });

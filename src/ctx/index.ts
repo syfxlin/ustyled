@@ -14,7 +14,9 @@ export type Breakpoints = {
 };
 
 export interface UstyledCtx {
+  mode: ColorMode;
   primary: string;
   breakpoints: Breakpoints;
+
   [key: string]: any;
 }
