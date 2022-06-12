@@ -39,6 +39,7 @@ const Demo: React.FC = () => {
         })}
       />
       <button onClick={() => setMode()}>{mode}</button>
+      <button onClick={() => setMode("auto")}>auto</button>
     </div>
   );
 };
