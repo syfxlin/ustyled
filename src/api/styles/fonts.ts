@@ -1,4 +1,5 @@
-import { compose, style, StyleApi } from "../style";
+import { style } from "../style";
+import { multiply } from "../../utils/multiply";
 
 export const font = style({
   prop: ["f", "font"],
@@ -14,14 +15,52 @@ export const font = style({
 
 export const fontSize = style({
   prop: ["fs", "fontSize"],
-  css: () => (value: string | number) => {
-    if (typeof value === "number") {
-      return `${value}rem`;
+  css: (ctx) => (value: string | number) => {
+    if (ctx.fontSizes[value]) {
+      return ctx.fontSizes[value];
+    }
+    if (typeof value === "number" && ctx.fontSizes.unit) {
+      return multiply(value, ctx.fontSizes.unit);
     }
     return value;
   },
 });
 
-export const fonts = compose(font, fontSize);
+export const fontWeight = style({
+  prop: ["fw", "fontWeight"],
+  css: (ctx) => (value: string | number) => {
+    if (ctx.fontWeights[value]) {
+      return ctx.fontWeights[value];
+    }
+    if (typeof value === "number" && ctx.fontWeights.unit) {
+      return multiply(value, ctx.fontWeights.unit);
+    }
+    return value;
+  },
+});
 
-export type FontsApi = StyleApi<typeof font> & StyleApi<typeof fontSize>;
+export const letterSpacing = style({
+  prop: ["ls", "letterSpacing"],
+  css: (ctx) => (value: string | number) => {
+    if (ctx.letterSpacings[value]) {
+      return ctx.letterSpacings[value];
+    }
+    if (typeof value === "number" && ctx.letterSpacings.unit) {
+      return multiply(value, ctx.letterSpacings.unit);
+    }
+    return value;
+  },
+});
+
+export const lineHeight = style({
+  prop: ["lh", "lineHeight"],
+  css: (ctx) => (value: string | number) => {
+    if (ctx.lineHeights[value]) {
+      return ctx.lineHeights[value];
+    }
+    if (typeof value === "number" && ctx.lineHeights.unit) {
+      return multiply(value, ctx.lineHeights.unit);
+    }
+    return value;
+  },
+});

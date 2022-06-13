@@ -1,5 +1,7 @@
+import { UstyledTheme } from "../../types";
+
 // prettier-ignore
-export const defaultColors: Record<string, string | string[]> = {
+export const colors: UstyledTheme["colors"] = {
   white: "#ffffff",
   black: "#000000",
   dark: [
@@ -12,7 +14,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#25262b",
     "#1A1B1E",
     "#141517",
-    "#101113",
+    "#101113"
   ],
   gray: [
     "#f8f9fa",
@@ -24,7 +26,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#868e96",
     "#495057",
     "#343a40",
-    "#212529",
+    "#212529"
   ],
   red: [
     "#fff5f5",
@@ -36,7 +38,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#fa5252",
     "#f03e3e",
     "#e03131",
-    "#c92a2a",
+    "#c92a2a"
   ],
   pink: [
     "#fff0f6",
@@ -48,7 +50,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#e64980",
     "#d6336c",
     "#c2255c",
-    "#a61e4d",
+    "#a61e4d"
   ],
   grape: [
     "#f8f0fc",
@@ -60,7 +62,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#be4bdb",
     "#ae3ec9",
     "#9c36b5",
-    "#862e9c",
+    "#862e9c"
   ],
   violet: [
     "#f3f0ff",
@@ -72,7 +74,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#7950f2",
     "#7048e8",
     "#6741d9",
-    "#5f3dc4",
+    "#5f3dc4"
   ],
   indigo: [
     "#edf2ff",
@@ -84,7 +86,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#4c6ef5",
     "#4263eb",
     "#3b5bdb",
-    "#364fc7",
+    "#364fc7"
   ],
   blue: [
     "#e7f5ff",
@@ -96,7 +98,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#228be6",
     "#1c7ed6",
     "#1971c2",
-    "#1864ab",
+    "#1864ab"
   ],
   cyan: [
     "#e3fafc",
@@ -108,7 +110,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#15aabf",
     "#1098ad",
     "#0c8599",
-    "#0b7285",
+    "#0b7285"
   ],
   teal: [
     "#e6fcf5",
@@ -120,7 +122,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#12b886",
     "#0ca678",
     "#099268",
-    "#087f5b",
+    "#087f5b"
   ],
   green: [
     "#ebfbee",
@@ -132,7 +134,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#40c057",
     "#37b24d",
     "#2f9e44",
-    "#2b8a3e",
+    "#2b8a3e"
   ],
   lime: [
     "#f4fce3",
@@ -144,7 +146,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#82c91e",
     "#74b816",
     "#66a80f",
-    "#5c940d",
+    "#5c940d"
   ],
   yellow: [
     "#fff9db",
@@ -156,7 +158,7 @@ export const defaultColors: Record<string, string | string[]> = {
     "#fab005",
     "#f59f00",
     "#f08c00",
-    "#e67700",
+    "#e67700"
   ],
   orange: [
     "#fff4e6",
@@ -168,6 +170,6 @@ export const defaultColors: Record<string, string | string[]> = {
     "#fd7e14",
     "#f76707",
     "#e8590c",
-    "#d9480f",
-  ],
+    "#d9480f"
+  ]
 };

@@ -1,6 +1,6 @@
 import { useU } from "./use-u";
 import { useMediaQuery } from "./use-media-query";
-import { Breakpoints } from "../ctx";
+import { Breakpoints } from "../types";
 
 export const useUp = (minWidth: keyof Breakpoints) => {
   const { ctx } = useU();

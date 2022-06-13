@@ -1,8 +1,7 @@
-import { style, StyleApi } from "../style";
-import { defaultColors } from "../../ctx";
+import { style } from "../style";
 import alpha from "color-alpha";
 
-export const colors = style({
+export const color = style({
   prop: ["c", "color"],
   css: (ctx) => (value: string, dark?: string) => {
     const parse = (value: string) => {
@@ -11,14 +10,14 @@ export const colors = style({
         return undefined;
       }
       const [, name, level, opacity] = m;
-      if (name !== "primary" && !defaultColors[name]) {
+      if (name !== "primary" && !ctx.colors[name]) {
         return undefined;
       }
       let color: string;
       if (level === undefined) {
-        color = defaultColors[name] as string;
+        color = ctx.colors[name] as string;
       } else {
-        color = defaultColors[name === "primary" ? ctx.primary : name][parseInt(level)];
+        color = ctx.colors[name === "primary" ? ctx.primary : name][parseInt(level)];
       }
       if (opacity === undefined) {
         return color;
@@ -34,5 +33,3 @@ export const colors = style({
     }
   },
 });
-
-export type ColorsApi = StyleApi<typeof colors>;

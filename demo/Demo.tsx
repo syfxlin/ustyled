@@ -2,7 +2,7 @@ import React from "react";
 import { useU } from "../src";
 
 const Demo: React.FC = () => {
-  const { css, api: s, setMode, mode } = useU();
+  const { css, api: s, mode, setMode } = useU();
 
   return (
     <div>
@@ -38,8 +38,24 @@ const Demo: React.FC = () => {
           height: "100px",
         })}
       />
-      <button onClick={() => setMode()}>{mode}</button>
-      <button onClick={() => setMode("auto")}>auto</button>
+      <button
+        onClick={() =>
+          setMode((p) => {
+            if (p === "auto") {
+              return "light";
+            }
+            if (p === "light") {
+              return "dark";
+            }
+            if (p === "dark") {
+              return "auto";
+            }
+            return "auto";
+          })
+        }
+      >
+        {mode}
+      </button>
     </div>
   );
 };

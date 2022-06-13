@@ -1,30 +1,42 @@
-import { compose, style, StyleApi } from "../style";
+import { style } from "../style";
+import { multiply } from "../../utils/multiply";
 
-export const radius = style({
-  prop: ["r", "radius"],
-  css: () => (value: string | number) => {
-    if (typeof value === "number") {
-      return `${value * 0.25}rem`;
-    }
-    const map: Record<string, string> = {
-      none: "0px",
-      half: "50%",
-      full: "9999px",
-    };
-    return map[value] ?? value;
+export const border = style({
+  prop: ["b", "border"],
+  css: (ctx) => (value: string) => {
+    return ctx.borders[value] ?? value;
   },
 });
 
 export const borderWidth = style({
   prop: ["bw", "borderWidth"],
-  css: () => (value: string | number) => {
-    if (typeof value === "number") {
-      return `${value}px`;
+  css: (ctx) => (value: string | number) => {
+    if (ctx.borderWidths[value]) {
+      return ctx.borderWidths[value];
+    }
+    if (typeof value === "number" && ctx.borderWidths.unit) {
+      return multiply(value, ctx.borderWidths.unit);
     }
     return value;
   },
 });
 
-export const borders = compose(radius, borderWidth);
+export const borderStyle = style({
+  prop: ["bs", "borderStyle"],
+  css: (ctx) => (value: string) => {
+    return ctx.borderStyles[value] ?? value;
+  },
+});
 
-export type BordersApi = StyleApi<typeof radius> & StyleApi<typeof borderWidth>;
+export const borderRadius = style({
+  prop: ["br", "borderRadius"],
+  css: (ctx) => (value: string | number) => {
+    if (ctx.borderRadius[value]) {
+      return ctx.borderRadius[value];
+    }
+    if (typeof value === "number" && ctx.borderRadius.unit) {
+      return multiply(value, ctx.borderRadius.unit);
+    }
+    return value;
+  },
+});

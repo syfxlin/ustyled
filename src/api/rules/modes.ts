@@ -1,4 +1,4 @@
-import { compose, style, StyleApi } from "../style";
+import { style } from "../style";
 
 export const light = style({
   prop: ["light"],
@@ -13,7 +13,3 @@ export const dark = style({
     return ctx.mode === "dark" ? "@media (min-width: 0px)" : "@media (max-width: 0px)";
   },
 });
-
-export const modes = compose(light, dark);
-
-export type ModesApi = StyleApi<typeof light> & StyleApi<typeof dark>;

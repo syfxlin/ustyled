@@ -1,10 +1,10 @@
-import { compose, style, StyleApi } from "../style";
+import { style } from "../style";
 
 export const up = style({
   prop: ["up"],
   css: (ctx) => (value: string) => {
     // @ts-ignore
-    return `@media (min-width: ${ctx.breakpoints[value] ?? value}px)`;
+    return `@media (min-width: ${ctx.breakpoints[value] ?? value})`;
   },
 });
 
@@ -12,7 +12,7 @@ export const down = style({
   prop: ["down"],
   css: (ctx) => (value: string) => {
     // @ts-ignore
-    return `@media (max-width: ${ctx.breakpoints[value] ?? value}px)`;
+    return `@media (max-width: ${ctx.breakpoints[value] ?? value})`;
   },
 });
 
@@ -20,10 +20,6 @@ export const between = style({
   prop: ["between"],
   css: (ctx) => (min: string, max: string) => {
     // @ts-ignore prettier-ignore
-    return `@media (min-width: ${ctx.breakpoints[min] ?? min}px) and (max-width: ${ctx.breakpoints[max] ?? max}px)`;
+    return `@media (min-width: ${ctx.breakpoints[min] ?? min}) and (max-width: ${ctx.breakpoints[max] ?? max})`;
   },
 });
-
-export const responsive = compose(up, down, between);
-
-export type ResponsiveApi = StyleApi<typeof up> & StyleApi<typeof down> & StyleApi<typeof between>;
