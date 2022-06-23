@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-
-const isBrowser = typeof window !== "undefined";
+import { ssr } from "../utils/ssr";
 
 export const useMediaQuery = (query: string, defaultState = false) => {
-  const [state, setState] = useState(isBrowser ? () => window.matchMedia(query).matches : defaultState);
+  const [state, setState] = useState(ssr(() => window.matchMedia(query).matches) ?? defaultState);
 
   useEffect(() => {
     let mounted = true;
-    const mql = window.matchMedia(query);
+    const mql = ssr(() => window.matchMedia(query));
+    if (!mql) {
+      return;
+    }
+
     const onChange = () => {
       if (!mounted) {
         return;

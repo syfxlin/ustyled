@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useMemo, useState } from "react";
 import { FullColorMode, UstyledCtx, UstyledTheme } from "../types";
 import deepmerge from "deepmerge";
 import { theme } from "../theme";
+import { ssr } from "../utils/ssr";
 
 // prettier-ignore
 // @ts-ignore
@@ -15,12 +16,12 @@ export type UstyledThemeProviderProps = React.PropsWithChildren<{
 export const UstyledProvider: React.FC<UstyledThemeProviderProps> = (props) => {
   // color mode
   const [mode, setMode] = useState<FullColorMode>(
-    (localStorage.getItem(ColorModeStorageKey) as FullColorMode) || "auto"
+    ssr(() => localStorage.getItem(ColorModeStorageKey) as FullColorMode) || "auto"
   );
 
   // ctx, theme
   const ctx = useMemo<UstyledCtx>(() => {
-    const detect = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    const detect = ssr(() => window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
     return {
       mode: mode === "auto" ? detect : mode,
       ...deepmerge(theme, props.theme ?? {}),
@@ -30,9 +31,9 @@ export const UstyledProvider: React.FC<UstyledThemeProviderProps> = (props) => {
   // store color mode
   useEffect(() => {
     if (mode === "auto") {
-      localStorage.removeItem(ColorModeStorageKey);
+      ssr(() => localStorage.removeItem(ColorModeStorageKey));
     } else {
-      localStorage.setItem(ColorModeStorageKey, mode);
+      ssr(() => localStorage.setItem(ColorModeStorageKey, mode));
     }
   }, [mode]);
 
