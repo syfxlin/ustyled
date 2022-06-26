@@ -6,7 +6,6 @@ ustyled（**styled**-system, **u**til） 是一个基于 CSS-in-JS 的工具库�
 
 ## Features
 
-- 通过 CSS prop 添加样式
 - 函数式主题
 - 暗色模式支持
 - 快速应用调色板
@@ -27,10 +26,9 @@ npm i @syfxlin/ustyled
 ## Tip
 
 v1 采用了较为激进的方式对样式进行预处理，因此造成了很多问题，导致在一些场景下出现无法处理的情况。
-由于不能顾及所有方面，因此 v2 参考了 Less Mixin 的语法，通过 `.color(blue1, blue2)` 方式对主题变量进行快速注入。
-同时你也可以采用模板字符串的方式注入主题变量 `${s.color('blue1', 'blue2')}`，该方式需要编写较多的字符。
+由于不能顾及所有方面，因此采用模板字符串的方式注入主题变量 `${u.color('blue1', 'blue2')}`
 
-v2 同时改进了主题的定义方式，如下，你可以通过 `prop` 定义字段名称，通过 `animation-delay: .d(1);` 方式进行定义，
+v2 同时改进了主题的定义方式，如下，你可以通过 `prop` 定义字段名称，通过 `animation-delay: ${u.d(1)};` 方式进行定义，
 ustyled 会通过 `css` 将参数处理成字符串，并替换定义的字符，如转换后为 `animation-delay: 1s;`。
 
 ```typescript

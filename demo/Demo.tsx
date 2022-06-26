@@ -1,31 +1,32 @@
 import React from "react";
 import { useU } from "../src";
+import { css } from "@emotion/react";
 
 const Demo: React.FC = () => {
-  const { css, api: s, mode, setMode } = useU();
+  const { u, mode, setMode } = useU();
 
   return (
     <div>
       <div
         css={css`
-          background-color: .c(blue5);
-          width: .s(25);
-          height: .s(25);
-          background: .c(blue8);
-          border: .bw(4) solid ${s.c("green5")};
-          border-top: .bw(20px) solid .c(yellow5);
+          background-color: ${u.c("blue5")};
+          width: ${u.s(25)};
+          height: ${u.s(25)};
+          background: ${u.c("blue8")};
+          border: ${u.bw(4)} solid ${u.c("green5")};
+          border-top: ${u.bw("20px")} solid ${u.c("yellow5")};
           color: #000;
 
-          .up(md) {
-            color: .c("red7", "blue7");
+          ${u.up("md")} {
+            color: ${u.c("red7", "blue7")};
           }
 
-          .light() {
-            height: .s(50);
+          ${u.light()} {
+            height: ${u.s(50)};
           }
 
-          .dark() {
-            height: .s(75);
+          ${u.dark()} {
+            height: ${u.s(75)};
           }
         `}
       >
@@ -33,7 +34,7 @@ const Demo: React.FC = () => {
       </div>
       <div
         css={css({
-          backgroundColor: ".c(blue5-7)",
+          backgroundColor: u.c("blue5,7"),
           width: "100px",
           height: "100px",
         })}

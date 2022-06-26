@@ -7,7 +7,7 @@ export type StyleOptions<K extends string, V extends Array<any>> = {
 };
 
 export type StyleGenerator<K extends string, V extends Array<any>> = (ctx: UstyledCtx) => {
-  [P in K]: (...value: V) => CSSScalar;
+  [P in K]: (...value: V) => any;
 };
 
 export type StyleApi<T extends (...args: any) => any> = ReturnType<T>;

@@ -5,7 +5,7 @@ export const color = style({
   prop: ["c", "color"],
   css: (ctx) => (value: string, dark?: string) => {
     const parse = (value: string) => {
-      const m = value.match(/^([a-zA-Z]+)(\d+)?(?:[_-](\d+))?$/);
+      const m = value.match(/^([a-zA-Z]+)(\d+)?(?:[_,-](\d+))?$/);
       if (!m) {
         return undefined;
       }

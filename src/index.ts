@@ -13,9 +13,6 @@ export * from "./api/index";
 // components
 export * from "./components/UstyledProvider";
 
-// css
-export * from "./css/index";
-
 // hooks
 export * from "./hooks/use-media-query";
 export * from "./hooks/use-u";
